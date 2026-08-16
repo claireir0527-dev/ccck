@@ -167,7 +167,7 @@ function loadSubmit(){
     </div>
 
   <div class="task-date">
-    📅${item.date}
+    📅　${item.date}
     ${item.time ? `　⏰ ${item.time}` : ""}
 </div>
 

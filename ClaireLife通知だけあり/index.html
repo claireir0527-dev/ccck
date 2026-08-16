@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<link rel="manifest" href="manifest.json">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ClaireLife</title>
+ <meta name="apple-mobile-web-app-title" content="ClaireLife">
+<link rel="apple-touch-icon" href="images/icon.jpg">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="phone home-page">
+ <div class="content">
+    <!-- ヘッダー -->
+
+    <header>
+
+        <h2 id="today"></h2>
+
+        <a href="setting.html">
+    <button class="setting-btn" id="settingButton">
+        ⚙️
+    </button>
+</a>
+
+    </header>
+
+
+    <!-- 学校の画像 -->
+
+    <div class="school">
+
+        <img src="images/school.jpg">
+
+    </div>
+
+
+    <!-- 今日の予定 -->
+
+    <h3>今日の予定</h3>
+
+
+   
+<!-- 時間割 -->
+
+<a href="#" id="todayScheduleLink">
+    <div class="card">
+
+        <div>
+            時間割
+        </div>
+
+        <div id="todayScheduleText">
+            未設定
+        </div>
+
+    </div>
+
+</a>
+
+
+
+
+    <!-- 提出物 -->
+<a href="#" onclick="openTodayTask()">
+    <div class="card" id="taskCard">
+        <div>
+            提出物
+        </div>
+
+        <div id="workCount">
+            0件
+        </div>
+
+    </div>
+</a>
+
+<!-- 通知 -->
+
+<a href="#" onclick="openTodayNotice()">
+
+<div class="card" id="noticeCard">
+
+    <div>
+        通知
+    </div>
+
+    <div id="noticeCount">
+        0件
+    </div>
+
+</div>
+
+</a>
+
+
+
+    <!-- メニュー -->
+
+    <div class="menu">
+
+
+        <!-- 時間割 -->
+
+        <a href="timetable.html">
+
+            <button>
+                📖<br>
+                時間割
+            </button>
+
+        </a>
+
+
+        <!-- 提出物 -->
+
+        <a href="submit-menu.html">
+
+            <button>
+                📝<br>
+                提出物
+            </button>
+
+        </a>
+
+
+        <!-- 通知 -->
+
+        <a href="notice-menu.html">
+
+            <button>
+                🔔<br>
+                通知
+            </button>
+
+        </a>
+
+
+        <!-- 電車・バス -->
+
+        <a href="train.html">
+
+            <button>
+                🚃<br>
+                電車・バス
+            </button>
+
+        </a>
+
+        <a href="calendar.html">
+
+
+
+</a>
+
+    
+ </div>
+
+</div>
+<!-- フッター -->
+
+<div class="bottom-menu">
+
+    <a href="index.html" class="menu-item active">
+        <div class="icon">🏠</div>
+        <div class="text">ホーム</div>
+    </a>
+
+    <a href="calendar.html" class="menu-item">
+        <div class="icon">📅</div>
+        <div class="text">カレンダー</div>
+    </a>
+
+</div>
+ </div>
+
+<!-- JavaScript -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/common.js"></script>
+<script src="js/home.js"></script>
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+

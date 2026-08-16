@@ -1,0 +1,1803 @@
+/* ===================================
+   学校アプリ style.css
+   第1回（基本デザイン）
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Yu Gothic",sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:0px 0px 0px;
+}
+
+.app{
+    width:390px;
+    margin:auto;
+}
+
+
+/* ---------- ヘッダー ---------- */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+header h2{
+    color:#6b3df5;
+    font-size:28px;
+    font-weight:bold;
+}
+
+header a{
+    text-decoration:none;
+    color:#6b3df5;
+    font-size:24px;
+}
+
+header button{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:12px;
+    background:#fff;
+    cursor:pointer;
+}
+
+/* ---------- 学校画像 ---------- */
+
+.school{
+    width:240px;
+    height:240px;
+    margin:20px auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.school img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    border-radius:20px;
+}
+
+/* ---------- 見出し ---------- */
+
+h3{
+    text-align:center;
+    color:#6b3df5;
+    margin:20px 0;
+}
+
+/* ---------- カード ---------- */
+
+.card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fff;
+    padding:18px;
+    margin-bottom:15px;
+    border-radius:18px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-2px);
+}
+
+.card div:last-child{
+    font-weight:bold;
+    color:#6b3df5;
+}
+
+/* ---------- リンク ---------- */
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ---------- メニュー ---------- */
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    margin-top:25px;
+}
+
+.menu a{
+    width:100%;
+}
+
+.menu button{
+    width:100%;
+    height:110px;
+    border:none;
+    border-radius:20px;
+    background:#fff;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+    transition:.2s;
+}
+
+.menu button:hover{
+    background:#6b3df5;
+    color:#fff;
+}
+
+/* ---------- 共通ボタン ---------- */
+
+button{
+    cursor:pointer;
+    transition:.2s;
+}
+
+.save{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:#6b3df5;
+    color:#fff;
+    font-size:18px;
+}
+
+.back{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:15px;
+    background:#fff;
+    font-size:18px;
+}
+
+.save:hover{
+    opacity:.9;
+}
+
+.back:hover{
+    background:#f5f3ff;
+}
+/* ===================================
+   第2回
+   時間割・提出物・通知・電車
+=================================== */
+
+/* ---------- 入力欄 ---------- */
+
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    border:2px solid #ddd;
+    border-radius:15px;
+    font-size:16px;
+    outline:none;
+    transition:.2s;
+    background:#fff;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#6b3df5;
+}
+
+/* ---------- 曜日ボタン ---------- */
+
+.days{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+}
+
+.day-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#fff;
+    color:#6b3df5;
+    font-weight:bold;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+.day-btn.active{
+    background:#6b3df5;
+    color:#fff;
+}
+
+/* ---------- 時間割 ---------- */
+
+.schedule{
+    margin-top:20px;
+}
+
+.lesson{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-bottom:10px;
+    padding:10px;
+
+    background:#fff;
+    border-radius:15px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+.lesson span{
+    width:35px;
+    text-align:center;
+    font-weight:bold;
+    color:#6b3df5;
+}
+
+.lesson input{
+    flex:1;
+    margin:0;
+    border:none;
+    background:none;
+    font-size:16px;
+}
+
+/* ---------- 提出物カード ---------- */
+
+.task-card{
+    position:relative;
+    background:#fff;
+    padding:18px;
+    margin:15px 0;
+    border-radius:18px;
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.task-title{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.task-date{
+    color:#666;
+    margin-bottom:8px;
+}
+
+.task-remain{
+    font-weight:bold;
+}
+
+/* ---------- 残り日数 ---------- */
+
+.today{
+    color:red;
+    font-weight:bold;
+}
+
+.tomorrow{
+    color:orange;
+    font-weight:bold;
+}
+
+.expired{
+    color:#999;
+    font-weight:bold;
+}
+
+/* ---------- 削除ボタン ---------- */
+
+
+/* ---------- 今日カード ---------- */
+
+.today-task{
+    background:#6b3df5;
+    color:#fff;
+}
+
+.today-task div{
+    color:#fff;
+}
+
+/* ---------- 電車・バス ---------- */
+
+.train{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-top:30px;
+}
+
+.trainButton,
+.menu-btn{
+    width:100%;
+    height:75px;
+
+    margin:5px 0;
+
+    border:none;
+    border-radius:18px;
+
+    background:#fff;
+
+    font-size:20px;
+    font-weight:bold;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+
+.trainButton:hover,
+.menu-btn:hover{
+
+    background:#6b3df5;
+    color:#fff;
+
+}
+
+/* ---------- アイコン ---------- */
+
+.icon{
+    width:40px;
+    text-align:center;
+    color:#6b3df5;
+    font-size:22px;
+}
+
+.home-icon{
+    width:60px;
+    height:60px;
+    object-fit:contain;
+}
+/* ===================================
+   第3回
+   カレンダー・Flatpickr・SweetAlert・下部メニュー
+=================================== */
+
+/* ---------- カレンダー ---------- */
+
+#calendar{
+    margin-top:20px;
+}
+
+.calendar-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+.calendar-table th,
+.calendar-table td{
+    width:14.28%;
+    height:55px;
+    text-align:center;
+    border:1px solid #e5e5e5;
+}
+
+.calendar-table th{
+    background:#6b3df5;
+    color:#fff;
+    font-weight:bold;
+}
+
+.calendar-table td{
+    background:#fff;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.calendar-table td:hover{
+    background:#ede9fe;
+}
+
+#dayPlan{
+    margin-top:20px;
+    padding:15px;
+    border-radius:15px;
+    background:#faf8ff;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+/* ---------- Flatpickr ---------- */
+
+.flatpickr-calendar{
+    border:none !important;
+    border-radius:20px !important;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.flatpickr-months{
+    background:#6b3df5 !important;
+}
+
+.flatpickr-current-month,
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month input.cur-year{
+    color:#fff !important;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month{
+    fill:#fff !important;
+}
+
+.flatpickr-weekdays{
+    background:#ede9fe !important;
+}
+
+.flatpickr-weekday{
+    color:#6b3df5 !important;
+    font-weight:bold;
+}
+
+.flatpickr-day.today{
+    border:2px solid #6b3df5;
+}
+
+.flatpickr-day:hover{
+    background:#ede9fe !important;
+    color:#6b3df5;
+}
+
+.flatpickr-day.selected{
+    background:#6b3df5 !important;
+    border-color:#6b3df5 !important;
+    color:#fff !important;
+}
+
+/* ---------- SweetAlert ---------- */
+
+.swal2-container{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    border-radius:25px;
+    overflow:hidden;
+    z-index:9999 !important;
+}
+
+.swal2-popup{
+    width:280px !important;
+    border-radius:20px !important;
+}
+
+.swal2-title{
+    font-size:20px !important;
+}
+
+.swal2-confirm{
+    background:#6b3df5 !important;
+}
+
+
+
+/* ---------- 共通 ---------- */
+
+footer{
+    margin:0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:10px;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+.app{
+    width:390px;
+    margin:20px auto;
+    position:relative;
+}
+
+
+/* SweetAlertをアプリ内に表示 */
+.swal2-container{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    border-radius:25px !important;
+    overflow:hidden !important;
+    z-index:9999 !important;
+}
+.swal2-container{
+    align-items:center !important;
+}
+
+.swal2-popup{
+    margin-top:0px !important;
+}
+
+
+
+
+
+
+body.swal2-shown{
+    padding-right:0 !important;
+}
+body.swal2-shown{
+    padding-right:0 !important;
+    overflow:hidden !important;
+}
+
+
+/* 黒い靄 */
+.swal2-container{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    padding:0 !important;
+}
+
+
+
+
+body.swal2-shown{
+    padding-right:0 !important;
+    overflow:hidden !important;
+}
+
+/* 提出物追加ボタン */
+
+.add-btn{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#6b3df5;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+
+    cursor:pointer;
+
+}
+.delete-btn,
+.done-btn{
+
+    width: 50px;
+    height: 50px;
+    border-radius:50%;
+
+    border:none;
+
+    background:#fff;
+
+    color:#000;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+}
+
+
+.task-card .done-btn{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:70px;
+    height:35px;
+
+    background:white !important;
+    color:#000 !important;
+
+    border:2px solid #ddd;
+    border-radius:18px;
+
+    font-size:13px;
+}
+.today-task .done-btn{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:70px;
+    height:35px;
+
+    background:white !important;
+    color:#000 !important;
+
+    border:2px solid #ddd;
+    border-radius:18px;
+
+    font-size:13px;
+}
+
+/* 今日の提出物が紫の時 */
+.today-task,
+.today-task *{
+    color:white !important;
+}
+
+
+/* 今日の通知が紫の時 */
+.today-notice,
+.today-notice *{
+    color:white !important;
+}
+
+.today-notice{
+    background:#6b3df5;
+}
+
+.done-btn{
+    position:absolute;
+
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:70px;
+    height:35px;
+
+    background:white !important;
+    color:#000 !important;
+
+    border:2px solid #ddd;
+    border-radius:50px;
+
+    font-size:13px;
+    font-weight:bold;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}.card,
+.task-card{
+    position:relative;
+}
+
+/* 提出物一覧の下ボタン位置 */
+.add-btn,
+.back{
+    margin-top:40px;
+}
+
+.submit-buttons{
+    margin-top:50px;
+}
+
+.submit-buttons button{
+    margin-top:15px;
+}
+
+/* 通知一覧の下ボタン */
+.notice-buttons{
+    margin-top:50px;
+}
+
+.notice-buttons button{
+    margin-top:15px;
+}
+/* 一覧画面の下ボタン間隔 */
+.add-btn,
+.back{
+    margin-bottom:10px;
+}
+
+.list-buttons{
+    margin-top:50px;
+}
+
+.list-buttons .back{
+    margin-top:25px;
+}
+
+.setting-btn{
+    width:50px;
+    height:50px;
+
+    border:1px solid #ddd;
+    border-radius:20px;
+
+    background:#fff;
+    color:#6b3df5;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:24px;
+
+    box-shadow:0 3px 8px rgba(0,0,0,.0.5);
+    transition:.2s;
+}
+
+.setting-btn:hover{
+    background:#f5f3ff;
+}
+
+.back-btn{
+    width:100%;
+    padding:14px;
+
+    border:1px solid #ddd;
+    border-radius:15px;
+
+    background:#fff;
+    color:#000;
+
+    font-size:16px;
+    font-weight:bold;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.back-btn:hover{
+    background:#f5f5f5;
+}
+
+.delete-btn{
+    width:80px;
+    height:38px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:1px solid #ddd;
+    border-radius:999px;
+
+    background:#fff;
+    color:#000;
+
+    font-size:14px;
+    font-weight:bold;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.delete-btn:hover{
+    background:#f5f3ff;
+}
+
+.trainButton{
+    width:100%;
+    height:75px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#fff;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.train a{
+    display:block;
+    width:100%;
+    margin:8px 0;
+}
+
+.trainButton{
+    width:100%;
+    height:75px;
+}
+
+
+
+
+
+
+
+
+.bus-page .trainButton{
+    margin: 50px 0 !important;
+}
+.bus-page > a:first-of-type{
+    margin-top:80px !important;
+}
+
+.submit-menu{
+    margin-top:100px !important;
+}
+
+.submit-menu a{
+    display:block;
+    margin:70px 0 !important;
+}
+
+.notice-menu{
+    margin-top:100px !important;
+}
+
+.notice-menu a{
+    display:block;
+    margin:45px 0 !important;
+}
+.save{
+    margin-bottom:5px !important;
+}
+
+.save + a .back{
+    margin-top:5px !important;
+}
+
+
+.home-page{
+    min-height:844px;
+}
+
+.top-alert{
+    margin: 30px 0 !important;
+}
+
+
+
+/* カレンダー */
+
+#calendar{
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:15px 10px 25px;
+
+    margin-top:10px;
+
+    width:100%;
+
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+    overflow:hidden;
+
+}
+
+
+
+#calendar h2{
+
+    text-align:center;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.calendar-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.calendar-table th{
+
+    height:45px;
+
+    background:#6b3df5;
+
+    color:white;
+
+    font-weight:normal;
+
+}
+
+
+
+.calendar-table td{
+
+    height:75px;
+
+    text-align:left;
+
+    vertical-align:top;
+
+    padding:8px;
+
+    font-size:20px;
+
+    border:1px solid #ddd;
+
+    cursor:pointer;
+
+}
+
+
+
+#dayPlan{
+
+    margin-top:15px;
+
+    padding:20px;
+
+    background:#f7f7f7;
+
+    border-radius:20px;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+}
+.calendar-table td.selected-day{
+
+    background:rgba(139,92,246,0.18) !important;
+
+    color:#6b3df5 !important;
+
+    border:none !important;
+
+}
+
+
+.calendar-header h2{
+
+    margin:0;
+
+    text-align:center;
+
+    font-size:26px;
+    color:#000;
+
+}
+
+.month-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#6b3df5;
+
+    color:white;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.month-btn:hover{
+
+    opacity:.8;
+
+}
+.calendar-header{
+    display:grid;
+    grid-template-columns:40px 1fr 40px;
+    align-items:center;
+    gap:15px;
+
+    
+}
+
+.calendar-header h2{
+    margin:0;
+    text-align:center;
+    font-size:26px;
+}
+
+.month-btn{
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#f4efff;
+    color:#6b3df5;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:18px;
+}
+
+
+/* ===== 下メニュー ===== */
+
+.bottom-menu{
+    position:sticky;
+
+    bottom:-40px;
+
+    margin:20px auto 0;
+
+    width:calc(100% - 40px);
+    height:65px;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(15px);
+
+    border-radius:35px;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+
+
+.menu-item{
+    flex:1;
+    height:55px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+    color:#888;
+
+    border-radius:28px;
+    transition:.2s;
+}
+
+.menu-item.active{
+    background:#efe9ff;
+    color:#6b3df5;
+}
+
+.icon{
+    font-size:22px;
+}
+
+.text{
+    font-size:12px;
+    margin-top:3px;
+}
+
+
+
+/* ===================================
+   スマホ枠と下部メニューの決定版修正
+   （重複を避けるため、このファイル内で`.phone`の設定はここだけにしてください）
+=================================== */
+
+/* スマホ枠の大きさと基準を設定 */
+.phone {
+    width:390px;
+    min-height:844px;
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    padding-bottom:100px;
+    position:relative;
+    overflow:hidden;
+}
+
+/* 下部メニュー固定 */
+.bottom-menu{
+    position:fixed;
+
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:calc(100% - 40px);
+    max-width:350px;
+
+    height:70px;
+
+    background:white;
+
+    border-radius:35px;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+    z-index:9999;
+}
+
+
+.menu-item{
+    text-decoration:none;
+    color:#555;
+
+    text-align:center;
+
+    font-size:13px;
+}
+
+
+.menu-item .icon{
+    font-size:25px;
+}
+
+
+.menu-item .text{
+    margin-top:3px;
+}
+
+
+/* メニュー内の文字とアイコンのデザイン */
+.bottom-menu .menu-item{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    margin:0;
+    padding:0;
+    border-radius:20px;
+}
+
+.bottom-menu .menu-item.active{
+    background:#ede9fe;   /* 薄い紫 */
+    color:#6b3df5;
+}
+
+.bottom-menu .menu-item.active .icon{
+    color:#6b3df5;
+    background:none;      /* 丸い背景をなくす */
+}
+
+
+.bottom-menu{
+    transition:0.3s;
+}
+
+
+html,
+body{
+    overflow-x:hidden;
+}
+
+
+.phone{
+    overflow-x:hidden;
+}.app{
+    width:390px;
+    max-width:100%;
+    overflow:hidden;
+}
+html,body{
+    width:100%;
+    overflow-x:hidden;
+}
+.short-page{
+    min-height:700px;
+}
+
+a + a .trainButton{
+    margin-top:50px;
+}
+
+.bus-page > a:first-of-type{
+    display:block;
+    margin-top:60px;
+}
+.bus-page a{
+    display:block;
+}
+
+.bus-page a + a{
+    margin-top:80px;
+}
+.setting-icon{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.profile-icon{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:20px auto;
+    border:2px solid #ddd;
+}
+
+
+.profile-icon{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:20px auto;
+    cursor:pointer;
+}
+
+#userName{
+    cursor:pointer;
+}
+
+.calendar-table td{
+    position: relative;
+}
+
+.day-mark{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transform: scale(0.6);
+    transform-origin: top right;
+    display: inline-block;
+}
+
+
+.task-buttons{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+
+.task-buttons button{
+    position:static !important;
+    transform:none !important;
+
+    width:75px;
+    height:35px;
+
+    border-radius:20px;
+    border:2px solid #ddd;
+
+    background:white !important;
+    color:#000 !important;
+
+    font-size:13px;
+}
+.edit-btn{
+    font-size:13px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+#dayPlan button{
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    border:1px solid #ddd;
+
+    background:#f7f7f7 !important;
+
+    color:#000 !important;
+
+    font-size:16px;
+    font-weight:bold;
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-left:8px;
+
+    padding:0;
+
+    box-shadow:0 3px 8px rgba(0,0,0,0.15);
+}
+.task-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+}
+
+
+.task-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+}
+
+#dayPlan .task-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+}
+
+#dayPlan .task-buttons button{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    border:1px solid #ddd;
+
+    background:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:0;
+
+}
+.task-card .task-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+}
+.card .task-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+#dayPlan .task-buttons{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+#dayPlan .task-buttons button{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #ddd;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+}
+.task-card .task-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+}.task-card .edit-btn,
+.task-card .done-btn{
+
+    width:70px;
+    height:35px;
+
+    border-radius:18px;
+
+    font-size:13px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:0;
+}
+#title,
+#date{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+}
+html,
+body {
+    background:#fff;
+}
+
+body{
+    background:#fff;
+}
+
+.app{
+    position:relative;
+    z-index:1;
+}
+
+.app::before{
+    content:"";
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#fff;
+    z-index:-1;
+}
+
+.swal2-container{
+    top:0 !important;
+    bottom:0 !important;
+    left:0 !important;
+    right:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+}
+
+body.swal2-shown{
+    margin:0 !important;
+    padding:0 !important;
+}
+.swal2-container{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+
+    background:rgba(0,0,0,0.45) !important;
+
+    padding:0 !important;
+    margin:0 !important;
+
+    border-radius:0 !important;
+    overflow:visible !important;
+
+    z-index:9999 !important;
+}
+
+.swal2-popup{
+    position:relative !important;
+    z-index:10000 !important;
+}
+.phone{
+    padding-top:0 !important;
+}
+
+.app{
+    margin-top:0 !important;
+}
+@media screen and (max-width:600px){
+
+    html,
+    body{
+        margin:0 !important;
+        padding:0 !important;
+        min-height:100vh !important;
+    }
+
+    .app{
+        margin-top:0 !important;
+    }
+
+    .phone{
+        margin-top:0 !important;
+        padding-top:0 !important;
+    }
+
+}
+@media screen and (max-width:600px){
+
+    body{
+        display:block !important;
+        align-items:initial !important;
+        justify-content:initial !important;
+        padding:0 !important;
+        margin:0 !important;
+    }
+
+    .app{
+        width:390px !important;
+        max-width:100% !important;
+        margin:0 auto !important;
+    }
+
+    .phone.home-page{
+        width:390px !important;
+        max-width:100% !important;
+        min-height:100vh !important;
+
+        margin:0 !important;
+        padding-top:0 !important;
+    }
+
+    .home-page .content{
+        margin:0 !important;
+        padding-top:0 !important;
+    }
+
+    .home-page header{
+        margin-top:0 !important;
+        padding-top:0 !important;
+    }
+
+}
+/* ===================================
+   SweetAlert 最終設定
+   画面の真ん中に表示
+=================================== */
+
+.swal2-container {
+    position: fixed !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: rgba(0,0,0,0.45) !important;
+
+    z-index: 99999 !important;
+}
+
+.swal2-popup {
+    position: relative !important;
+
+    top: 180px !important;
+    
+    margin: 0 !important;
+
+    
+}
+
+
+}
+/* ===================================
+   スマホ表示の幅を修正
+=================================== */
+
+@media screen and (max-width: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .app {
+        width: 100% !important;
+        max-width: 390px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        overflow: hidden;
+    }
+
+    .phone {
+        width: 100% !important;
+        max-width: 390px !important;
+        margin: 0 !important;
+
+        box-sizing: border-box !important;
+
+        /* 左右の余白 */
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+
+        overflow-x: hidden !important;
+    }
+
+    /* 通知入力欄 */
+    #noticeText,
+    #noticeDate {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 時間欄 */
+    .notice-time-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        overflow: hidden !important;
+    }
+
+    .notice-time-box #noticeTime {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+/* =========================
+   通知追加画面
+========================= */
+
+#noticeText,
+#noticeDate,
+#noticeTime{
+    width:100%;
+    height:55px;
+    margin:10px 0;
+    padding:12px 14px;
+    box-sizing:border-box;
+    border:2px solid #ddd;
+    border-radius:15px;
+    background:#fff;
+    font-size:16px;
+    outline:none;
+}
+
+#noticeText:focus,
+#noticeDate:focus,
+#noticeTime:focus{
+    border-color:#6b3df5;
+}
+
+
+/* 通知の時間欄 */
+
+.notice-time-box{
+    width:100%;
+    height:55px;
+    margin:10px 0;
+    padding:0 12px;
+
+    display:flex;
+    align-items:center;
+
+    border:2px solid #ddd;
+    border-radius:15px;
+    background:#fff;
+
+    box-sizing:border-box;
+    overflow:hidden;
+}
+
+.notice-time-box span{
+    flex:0 0 auto;
+    font-size:16px;
+    color:#999;
+    white-space:nowrap;
+}
+
+.notice-time-box #noticeTime{
+    flex:1;
+    width:0;
+    min-width:0;
+    height:51px;
+
+    margin:0;
+    padding:0 5px;
+
+    border:none;
+    outline:none;
+    background:transparent;
+
+    font-size:16px;
+    box-sizing:border-box;
+}
+.notice-time-box{
+    position:relative;
+}
+
+.time-placeholder{
+    position:absolute;
+    left:14px;
+    color:#999;
+    font-size:16px;
+    pointer-events:none;
+}
+
+#noticeTime{
+    position:relative;
+    z-index:2;
+}
+.notice-time-box{
+    position:relative;
+}
+
+#timePlaceholder{
+    position:absolute;
+    left:14px;
+    color:#999;
+    font-size:16px;
+    pointer-events:none;
+}
+
+#noticeTime{
+    position:relative;
+    z-index:2;
+}

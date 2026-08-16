@@ -50,9 +50,10 @@ function addSubmit(){
     if(editIndex !== null){
 
         submits[Number(editIndex)] = {
-            title: title,
-            date: date
-        };
+    title: title,
+    date: date,
+    time: time
+};
 
         localStorage.removeItem("editSubmitIndex");
 
@@ -61,11 +62,11 @@ function addSubmit(){
     // 新規追加
     else{
 
-        submits.push({
-            title: title,
-            date: date
-        });
-
+       submits.push({
+    title: title,
+    date: date,
+    time: time
+});
     }
 
     localStorage.setItem(
@@ -164,9 +165,10 @@ function loadSubmit(){
         ${item.title}
     </div>
 
-    <div class="task-date">
-        📅 期限：${item.date}
-    </div>
+  <div class="task-date">
+    📅 期限：${item.date}
+    ${item.time ? `　⏰ ${item.time}` : ""}
+</div>
 
     <div class="task-remain ${remainClass}">
         ${remainText}
@@ -308,9 +310,11 @@ function cancelSubmit(){
 
     const date =
         document.getElementById("date").value;
-
-    if(title !== "" || date !== ""){
-
+    const time =
+    document.getElementById("submitTime").value;
+const time =
+    document.getElementById("submitTime").value;
+    if(title !== "" || date !== "" || time !== ""){
         Swal.fire({
 
             target: ".app",
@@ -337,10 +341,13 @@ function cancelSubmit(){
 
                 document.getElementById("title").value = "";
 
-                document.getElementById("date").value = "";
+document.getElementById("date").value = "";
 
-                checkInput();
+document.getElementById("submitTime").value = "";
 
+document.getElementById("submitTimePlaceholder").style.display = "block";
+
+checkInput();
             }
 
         });
@@ -361,15 +368,15 @@ function checkInput(){
 
     const date =
         document.getElementById("date").value;
-
+const time =
+    document.getElementById("submitTime").value;
     const cancel =
         document.getElementById("cancelBtn");
 
     const home =
         document.getElementById("homeBtn");
-
-    if(title !== "" || date !== ""){
-
+if(title !== "" || date !== "" || time !== ""){
+   
         cancel.style.display = "block";
         home.style.display = "none";
 
@@ -427,6 +434,15 @@ window.addEventListener("load", function(){
 
             document.getElementById("date").value =
                 submits[index].date;
+            document.getElementById("submitTime").value =
+    submits[index].time || "";
+
+if(submits[index].time){
+
+    document.getElementById("submitTimePlaceholder")
+    .style.display = "none";
+
+}
 
             document.querySelector(".save").textContent =
                 "💾 更新";
@@ -482,3 +498,29 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 });
+const submitTime =
+    document.getElementById("submitTime");
+
+const submitTimePlaceholder =
+    document.getElementById("submitTimePlaceholder");
+
+
+if(submitTime){
+
+    submitTime.addEventListener("change", function(){
+
+        if(this.value){
+
+            submitTimePlaceholder.style.display = "none";
+
+        }else{
+
+            submitTimePlaceholder.style.display = "block";
+
+        }
+
+        checkInput();
+
+    });
+
+}

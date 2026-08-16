@@ -305,55 +305,18 @@ if(title !== "" || date !== "" || time !== ""){
 // ===================================
 // キャンセル
 // ===================================
-
 function cancelSubmit(){
 
-    const title =
-        document.getElementById("title").value;
+    document.getElementById("title").value = "";
 
-    const date =
-        document.getElementById("date").value;
-const time =
-    document.getElementById("submitTime").value;
-    if(title !== "" || date !== "" || time !== ""){
-        Swal.fire({
+    document.getElementById("date").value = "";
 
-            target: ".app",
+    document.getElementById("submitTime").value = "";
 
-            position: "top",
+    document.getElementById("submitTimePlaceholder")
+    .style.display = "block";
 
-            icon: "question",
-
-            title: "入力内容を消しますか？",
-
-            width: 280,
-
-            showCancelButton: true,
-
-            confirmButtonText: "消す",
-
-            cancelButtonText: "戻る",
-
-            confirmButtonColor: "#6b3df5"
-
-        }).then((result) => {
-
-            if(result.isConfirmed){
-
-                document.getElementById("title").value = "";
-
-document.getElementById("date").value = "";
-
-document.getElementById("submitTime").value = "";
-
-document.getElementById("submitTimePlaceholder").style.display = "block";
-
-checkInput();
-            }
-
-        });
-
-    }
+    checkInput();
 
 }
 

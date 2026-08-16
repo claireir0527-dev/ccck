@@ -9,7 +9,8 @@ function addSubmit(){
 
     const date =
         document.getElementById("date").value;
-
+const time =
+    document.getElementById("submitTime").value;
     // 提出物名チェック
     if(title.trim() === ""){
 
@@ -277,9 +278,11 @@ function backSubmit(){
 
     const date =
         document.getElementById("date").value;
+const time =
+    document.getElementById("submitTime").value;
 
-    if(title !== "" || date !== ""){
-
+if(title !== "" || date !== "" || time !== ""){
+  
        Swal.fire({
     icon: "warning",
     title: "提出物名を入力してください",
@@ -310,8 +313,6 @@ function cancelSubmit(){
 
     const date =
         document.getElementById("date").value;
-    const time =
-    document.getElementById("submitTime").value;
 const time =
     document.getElementById("submitTime").value;
     if(title !== "" || date !== "" || time !== ""){

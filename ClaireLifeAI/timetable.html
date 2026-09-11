@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>時間割</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+<div class="app">
+<div class="phone">
+
+
+<header>
+
+<a href="index.html">←</a>
+
+
+
+<h2>時間割</h2>
+
+🦉
+
+</header>
+
+
+
+
+
+
+<div class="days">
+
+<button class="day-btn" onclick="showDay('月', this)">月</button>
+<button class="day-btn" onclick="showDay('火', this)">火</button>
+<button class="day-btn" onclick="showDay('水', this)">水</button>
+<button class="day-btn" onclick="showDay('木', this)">木</button>
+<button class="day-btn" onclick="showDay('金', this)">金</button>
+</div>
+
+
+
+
+<div class="schedule" id="schedule">
+
+
+<div class="lesson">
+
+<span>1</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+
+<div class="lesson">
+
+<span>2</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+<div class="lesson">
+
+<span>3</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+
+<div class="lesson">
+
+<span>4</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+<div class="lesson">
+
+<span>5</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+
+<div class="lesson">
+
+<span>6</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+
+<div class="lesson">
+
+<span>7</span>
+
+<input class="subject" 
+placeholder="教科"
+oninput="changeIcon(this)">
+
+<span class="icon">📖</span>
+
+</div>
+
+
+</div>
+
+
+
+<button class="save" onclick="saveSchedule()">
+
+💾 保存
+
+</button>
+
+
+
+<a href="index.html">
+
+<button class="back">
+
+戻る
+
+</button>
+
+</a>
+
+
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/common.js"></script>
+<script src="js/timetable.js"></script>
+
+</body>
+
+</html>
+
+

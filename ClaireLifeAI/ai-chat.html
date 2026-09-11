@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIチャット</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.ai-page{
+    width:390px;
+    height:600px;
+    margin:auto;
+    background:#fff;
+    border-radius:25px;
+    box-shadow:none;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+.ai-header{
+    padding:20px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    color:#6b3df5;
+    border-bottom:1px solid #eee;
+}
+.ai-messages{
+    flex:1;
+    padding:15px;
+    overflow-y:auto;
+    min-height:0;
+    scrollbar-width:none;
+}
+
+.ai-messages::-webkit-scrollbar{
+    display:none;
+}
+.ai-message{
+    max-width:80%;
+    padding:11px 14px;
+    margin-bottom:12px;
+    border-radius:16px;
+    line-height:1.5;
+    word-break:break-word;
+}
+.ai-message.bot{
+    background:#f0eefb;
+    margin-right:auto;
+}
+.ai-message.user{
+    background:#6b3df5;
+    color:white;
+    margin-left:auto;
+    width:fit-content;
+    max-width:80%;
+}
+.ai-input-area{
+    display:flex;
+    gap:8px;
+    padding:12px;
+    border-top:1px solid #eee;
+    background:#fff;
+    flex-shrink:0;
+}
+#aiInput{
+    flex:1;
+    min-width:0;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+#aiSend{
+    border:none;
+    border-radius:12px;
+    padding:0 16px;
+    background:#6b3df5;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+body{
+    align-items:flex-start !important;
+}
+
+.app{
+    margin-top:0 !important;
+}
+</style>
+
+</head>
+<body>
+<div class="app">
+    <div class="ai-page">
+        <div class="ai-header">🤖 AIチャット</div>
+
+        <div class="ai-messages" id="aiMessages">
+            <div class="ai-message bot">
+                こんにちは！<br>
+                学校アプリについて質問してください。
+            </div>
+        </div>
+
+        <div class="ai-input-area">
+            <input id="aiInput" type="text" placeholder="メッセージを入力">
+            <button id="aiSend">送信</button>
+        </div>
+            </div>
+
+    <!-- 下メニュー -->
+    <div class="bottom-menu">
+
+        <a href="index.html" class="menu-item">
+            <div class="icon">🏠</div>
+            <div class="text">ホーム</div>
+        </a>
+
+        <a href="calendar.html" class="menu-item">
+            <div class="icon">📅</div>
+            <div class="text">カレンダー</div>
+        </a>
+
+        <a href="ai-chat.html" class="menu-item active">
+            <div class="icon">🤖</div>
+            <div class="text">AI</div>
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+const input = document.getElementById("aiInput");
+const send = document.getElementById("aiSend");
+const messages = document.getElementById("aiMessages");
+
+function sendMessage(){
+    const text = input.value.trim();
+    if(text === "") return;
+
+    const userMessage = document.createElement("div");
+    userMessage.className = "ai-message user";
+    userMessage.textContent = text;
+    messages.appendChild(userMessage);
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+
+    const botMessage = document.createElement("div");
+    botMessage.className = "ai-message bot";
+    botMessage.textContent = "AIとの接続はこれから設定します。";
+    messages.appendChild(botMessage);
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+send.addEventListener("click", sendMessage);
+
+input.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        sendMessage();
+    }
+});
+</script>
+</body>
+</html>

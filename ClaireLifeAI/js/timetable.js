@@ -156,7 +156,7 @@ icon.textContent="📐";
 
 }
 
-else if(subject.includes("国語") || subject.includes("古典") || subject.includes("言語")|| subject.includes("表現")){
+else if(subject.includes("国語") || subject.includes("古典") || subject.includes("言語")|| subject.includes("探求")){
 
 icon.textContent="🔤";
 

@@ -1,4 +1,5 @@
 import { db } from "./firebase.js";
+
 import {
     collection,
     getDocs,
@@ -11,20 +12,27 @@ let today = new Date();
 let year = today.getFullYear();
 let month = today.getMonth();
 let notices = [];
+let submits = [];
 
-function getSubmits() {
-    return JSON.parse(localStorage.getItem("submits")) || [];
-}
-
-async function loadNotices() {
+async function loadData() {
     try {
-        const snapshot = await getDocs(collection(db, "notices"));
-        notices = snapshot.docs.map(docSnap => ({
+        const [submitSnapshot, noticeSnapshot] = await Promise.all([
+            getDocs(collection(db, "submits")),
+            getDocs(collection(db, "notices"))
+        ]);
+
+        submits = submitSnapshot.docs.map(docSnap => ({
+            id: docSnap.id,
+            ...docSnap.data()
+        }));
+
+        notices = noticeSnapshot.docs.map(docSnap => ({
             id: docSnap.id,
             ...docSnap.data()
         }));
     } catch (error) {
-        console.error("カレンダーの通知読み込みに失敗しました:", error);
+        console.error("カレンダーのデータ読み込みに失敗しました:", error);
+        submits = [];
         notices = [];
     }
 }
@@ -32,7 +40,6 @@ async function loadNotices() {
 function createCalendar() {
     const first = new Date(year, month, 1);
     const last = new Date(year, month + 1, 0);
-    const submits = getSubmits();
 
     let html = `
         <div class="calendar-header">
@@ -89,13 +96,18 @@ function createCalendar() {
     }
 }
 
+async function refreshCalendar() {
+    await loadData();
+    createCalendar();
+}
+
 function prevMonth() {
     month--;
     if (month < 0) {
         month = 11;
         year--;
     }
-    createCalendar();
+    refreshCalendar();
 }
 
 function nextMonth() {
@@ -104,7 +116,7 @@ function nextMonth() {
         month = 0;
         year++;
     }
-    createCalendar();
+    refreshCalendar();
 }
 
 function selectDay(day) {
@@ -119,17 +131,24 @@ function selectDay(day) {
         String(month + 1).padStart(2, "0") + "-" +
         String(day).padStart(2, "0");
 
-    const submits = getSubmits();
     let submitText = "";
 
-    submits.forEach((item, index) => {
+    submits.forEach((item) => {
         if (item.date === date) {
             submitText += `
                 <div class="task-card">
-                    <div class="task-title">${escapeHtml(item.title)}</div>
+                    <div class="task-title">
+                        ${escapeHtml(item.title)}
+                    </div>
+                    <div class="task-date">
+                        📅 ${escapeHtml(item.date)}
+                        ${item.time ? `　⏰ ${escapeHtml(item.time)}` : ""}
+                    </div>
                     <div class="task-buttons">
-                        <button class="edit-btn" onclick="editSubmit(${index})">✏️</button>
-                        <button class="done-btn" onclick="calendarDeleteSubmit(${index})">🗑️</button>
+                        <button class="edit-btn"
+                            onclick="editSubmit('${item.id}')">✏️</button>
+                        <button class="done-btn"
+                            onclick="calendarDeleteSubmit('${item.id}')">🗑️</button>
                     </div>
                 </div>
             `;
@@ -142,10 +161,14 @@ function selectDay(day) {
         if (item.date === date) {
             noticeText += `
                 <div class="task-card">
-                    <div class="task-title">${escapeHtml(item.text)}</div>
+                    <div class="task-title">
+                        ${escapeHtml(item.text)}
+                    </div>
                     <div class="task-buttons">
-                        <button class="edit-btn" onclick="editNotice('${item.id}')">✏️</button>
-                        <button class="done-btn" onclick="calendarDeleteNotice('${item.id}')">🗑️</button>
+                        <button class="edit-btn"
+                            onclick="editNotice('${item.id}')">✏️</button>
+                        <button class="done-btn"
+                            onclick="calendarDeleteNotice('${item.id}')">🗑️</button>
                     </div>
                 </div>
             `;
@@ -167,18 +190,27 @@ function selectDay(day) {
     if (document.activeElement) document.activeElement.blur();
 }
 
-function calendarDeleteSubmit(index) {
-    const submits = getSubmits();
-    submits.splice(index, 1);
-    localStorage.setItem("submits", JSON.stringify(submits));
-    createCalendar();
+async function calendarDeleteSubmit(id) {
+    try {
+        await deleteDoc(doc(db, "submits", id));
+        await refreshCalendar();
+    } catch (error) {
+        console.error("カレンダーから提出物を削除できませんでした:", error);
+        if (typeof Swal !== "undefined") {
+            Swal.fire({
+                icon: "error",
+                title: "削除できませんでした",
+                width: 280,
+                confirmButtonColor: "#6b3df5"
+            });
+        }
+    }
 }
 
 async function calendarDeleteNotice(id) {
     try {
         await deleteDoc(doc(db, "notices", id));
-        await loadNotices();
-        createCalendar();
+        await refreshCalendar();
     } catch (error) {
         console.error("カレンダーから通知を削除できませんでした:", error);
         if (typeof Swal !== "undefined") {
@@ -212,10 +244,14 @@ window.selectDay = selectDay;
 window.calendarDeleteSubmit = calendarDeleteSubmit;
 window.calendarDeleteNotice = calendarDeleteNotice;
 window.editNotice = editNotice;
+window.editSubmit = function(id) {
+    localStorage.setItem("editSubmitId", id);
+    location.href = "add-submit.html";
+};
 
 async function startCalendar() {
     if (!calendar) return;
-    await loadNotices();
+    await loadData();
     createCalendar();
 }
 

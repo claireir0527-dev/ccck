@@ -512,7 +512,7 @@ function selectDay(day) {
                     </div>
 
 
-                    <div class="task-buttons">
+                    <div class="task-buttons calendar-buttons">
 
                         <button
                             class="edit-btn"
@@ -587,8 +587,7 @@ function selectDay(day) {
                     </div>
 
 
-                    <div class="task-buttons">
-
+                    <div class="task-buttons calendar-buttons">
                         <button
                             class="edit-btn"
                             onclick="editNotice('${item.id}')"

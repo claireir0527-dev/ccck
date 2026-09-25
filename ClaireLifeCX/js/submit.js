@@ -4,11 +4,11 @@ import {
     collection,
     addDoc,
     getDocs,
+    getDoc,
     doc,
     updateDoc,
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
 // ===================================
 // 提出物（Firebase / Firestore）
 // ===================================
@@ -262,54 +262,114 @@ function setupDatePicker() {
 // ===================================
 // 編集データ読み込み
 // ===================================
-
 async function setupEditPage() {
+
     const title = document.getElementById("title");
     const date = document.getElementById("date");
 
-    if (!title || !date) return;
+    if (!title || !date) {
+        return;
+    }
 
     const editId = localStorage.getItem("editSubmitId");
 
-    if (!editId) return;
+    if (!editId) {
+        return;
+    }
 
     try {
-        const snapshot = await getDocs(userCollection("submits"));
-        const target = snapshot.docs.find((item) => item.id === editId);
 
-        if (!target) {
+        // ログインユーザーを待つ
+        await waitForUser();
+
+        // 編集する提出物をIDで直接取得
+        const submitRef = userDoc("submits", editId);
+        const target = await getDoc(submitRef);
+
+        if (!target.exists()) {
+
+            console.error(
+                "編集する提出物が見つかりません:",
+                editId
+            );
+
             localStorage.removeItem("editSubmitId");
+
+            Swal.fire({
+                icon: "error",
+                title: "提出物が見つかりません",
+                text: "一覧からもう一度編集してください",
+                width: 280,
+                confirmButtonColor: "#6b3df5"
+            });
+
             return;
         }
 
         const data = target.data();
 
+        // =========================
+        // 入力欄に元のデータを入れる
+        // =========================
+
         title.value = data.title || "";
         date.value = data.date || "";
 
-        const time = document.getElementById("submitTime");
-        const placeholder = document.getElementById("submitTimePlaceholder");
+        const time =
+            document.getElementById("submitTime");
 
-        if (time) time.value = data.time || "";
-        if (placeholder && data.time) {
-            placeholder.style.display = "none";
+        const placeholder =
+            document.getElementById("submitTimePlaceholder");
+
+        if (time) {
+            time.value = data.time || "";
         }
 
-        const save = document.querySelector(".save");
-        if (save) save.textContent = "💾 更新";
+        if (placeholder) {
+            placeholder.style.display =
+                data.time ? "none" : "block";
+        }
 
-        const home = document.getElementById("homeBtn");
+        // =========================
+        // ボタン表示
+        // =========================
+
+        const save =
+            document.querySelector(".save");
+
+        if (save) {
+            save.textContent = "💾 更新";
+        }
+
+        const home =
+            document.getElementById("homeBtn");
+
         if (home) {
+
             home.textContent = "🔙 一覧に戻る";
+
             home.onclick = function () {
                 location.href = "tasks.html";
             };
         }
 
+        // 入力状態を更新
         checkInput();
 
     } catch (error) {
-        console.error("提出物の編集データ読み込みに失敗しました:", error);
+
+        console.error(
+            "提出物の編集データ読み込みに失敗しました:",
+            error
+        );
+
+        Swal.fire({
+            icon: "error",
+            title: "編集データを読み込めませんでした",
+            text: "Firebase / Firestoreの設定を確認してください",
+            width: 280,
+            confirmButtonColor: "#6b3df5"
+        });
     }
 }
 

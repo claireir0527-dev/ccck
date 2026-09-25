@@ -4,11 +4,11 @@ import {
     collection,
     addDoc,
     getDocs,
+    getDoc,
     doc,
     updateDoc,
     deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
 let notices = [];
 
 function showNotice() {
@@ -295,36 +295,101 @@ async function setupNoticeAddPage() {
 
     const editId = localStorage.getItem("editNoticeId");
 
-    if (editId) {
-        try {
-            const snapshot = await getDocs(userCollection("notices"));
-            const target = snapshot.docs.find((item) => item.id === editId);
+   if (editId) {
+    try {
 
-            if (target) {
-                const data = target.data();
+        await waitForUser();
 
-                document.getElementById("noticeText").value = data.text || "";
-                document.getElementById("noticeDate").value = data.date || "";
-                document.getElementById("noticeTime").value = data.time || "";
+        const noticeRef = userDoc("notices", editId);
+        const target = await getDoc(noticeRef);
 
-                if (data.time) {
-                    document.getElementById("timePlaceholder").style.display = "none";
-                }
+        if (target.exists()) {
 
-                document.querySelector(".save").textContent = "💾 更新";
+            const data = target.data();
 
-                const home = document.getElementById("homeNoticeBtn");
-                if (home) {
-                    home.textContent = "🔙 一覧に戻る";
-                    home.onclick = function () {
-                        location.href = "notice.html";
-                    };
-                }
+            const textElement =
+                document.getElementById("noticeText");
+
+            const dateElement =
+                document.getElementById("noticeDate");
+
+            const timeElement =
+                document.getElementById("noticeTime");
+
+            if (textElement) {
+                textElement.value = data.text || "";
             }
-        } catch (error) {
-            console.error("編集データの読み込みに失敗しました:", error);
+
+            if (dateElement) {
+                dateElement.value = data.date || "";
+            }
+
+            if (timeElement) {
+                timeElement.value = data.time || "";
+            }
+
+            const placeholder =
+                document.getElementById("timePlaceholder");
+
+            if (placeholder) {
+                placeholder.style.display =
+                    data.time ? "none" : "block";
+            }
+
+            const saveButton =
+                document.querySelector(".save");
+
+            if (saveButton) {
+                saveButton.textContent = "💾 更新";
+            }
+
+            const home =
+                document.getElementById("homeNoticeBtn");
+
+            if (home) {
+                home.textContent = "🔙 一覧に戻る";
+
+                home.onclick = function () {
+                    location.href = "notice.html";
+                };
+            }
+
+            checkNoticeInput();
+
+        } else {
+
+            console.error(
+                "編集する通知が見つかりません:",
+                editId
+            );
+
+            localStorage.removeItem("editNoticeId");
+
+            Swal.fire({
+                icon: "error",
+                title: "通知が見つかりません",
+                text: "一覧からもう一度編集してください",
+                width: 280,
+                confirmButtonColor: "#6b3df5"
+            });
         }
+
+    } catch (error) {
+
+        console.error(
+            "編集データの読み込みに失敗しました:",
+            error
+        );
+
+        Swal.fire({
+            icon: "error",
+            title: "編集データを読み込めませんでした",
+            text: "Firebase / Firestoreの設定を確認してください",
+            width: 280,
+            confirmButtonColor: "#6b3df5"
+        });
     }
+}
 
     checkNoticeInput();
 }

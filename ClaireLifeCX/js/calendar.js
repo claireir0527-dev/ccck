@@ -569,23 +569,21 @@ function selectDay(day) {
                     </div>
 
 
-                    <div class="task-date">
+                   
+<div class="task-date">
 
-                        📅
-                        ${escapeHtml(
-                            normalizeDate(
-                                item.date
-                            )
-                        )}
+    📅
+    ${escapeHtml(
+        normalizeDate(item.date)
+    )}
 
-                        ${
-                            item.time
-                            ? `　⏰ ${escapeHtml(item.time)}`
-                            : ""
-                        }
+    ${
+        item.time
+        ? `<br>⏰ ${escapeHtml(item.time)}`
+        : ""
+    }
 
-                    </div>
-
+</div>
 
                     <div class="task-buttons calendar-buttons">
                         <button

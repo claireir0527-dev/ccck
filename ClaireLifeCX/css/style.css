@@ -1896,19 +1896,4 @@ body.swal2-shown{
     align-items: center !important;
 
     border-radius: 50% !important;
-}/* ===================================
-   カレンダー内の編集・削除ボタン
-   縦並び
-=================================== */
-
-.calendar-table ~ #dayPlan .task-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-}
-
-.calendar-table ~ #dayPlan .task-buttons button {
-    width: 100%;
-    display: block;
 }

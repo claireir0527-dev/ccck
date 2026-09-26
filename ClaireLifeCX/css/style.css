@@ -1474,12 +1474,13 @@ a + a .trainButton{
 }
 .task-card .edit-btn,
 .task-card .done-btn{
-    width:40px;
-    height:40px;
+    width:75px;
+    height:35px;
 
-    border-radius:50%;
+    border-radius:20px;
 
-    font-size:16px;
+    font-size:13px;
+    font-weight:bold;
 
     display:flex;
     justify-content:center;

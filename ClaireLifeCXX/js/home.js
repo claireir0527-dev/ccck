@@ -513,6 +513,8 @@ async function initializeHome() {
 
 
 initializeHome();
+
+
 // ===================================
 // ホーム画面での自動通知
 // ===================================
@@ -521,25 +523,32 @@ async function checkHomeNotifications() {
 
     // 通知機能が使えるか確認
     if (!("Notification" in window)) {
+        console.log("この端末は通知に対応していません");
         return;
     }
 
+    // 通知が許可されていなければ終了
     if (Notification.permission !== "granted") {
+        console.log("通知が許可されていません");
         return;
     }
 
     try {
 
+        // ログインユーザーを待つ
         await waitForUser();
 
         const now = new Date();
 
-        const hour = now.getHours();
-        const minute = now.getMinutes();
+        console.log(
+            "自動通知チェック:",
+            now.toLocaleTimeString()
+        );
 
-        // ================================
+
+        // ===================================
         // 🔔 通知
-        // ================================
+        // ===================================
 
         const noticeSnapshot =
             await getDocs(
@@ -552,44 +561,79 @@ async function checkHomeNotifications() {
                 ...docSnap.data()
             }));
 
+
         notices.forEach(notice => {
 
+            // 日付または時間がなければ終了
             if (!notice.date || !notice.time) {
                 return;
             }
 
+
+            const date =
+                normalizeDate(notice.date);
+
+
             const target =
                 new Date(
-                    `${normalizeDate(notice.date)}T${notice.time}:00`
+                    `${date}T${notice.time}:00`
                 );
 
-            const diff =
-                now.getTime() - target.getTime();
 
-            // 指定時刻から30秒以内
-            if (diff >= 0 && diff < 30000) {
+            const diff =
+                now.getTime() -
+                target.getTime();
+
+
+            // 指定時刻から2分以内
+            if (
+                diff >= 0 &&
+                diff < 120000
+            ) {
 
                 const key =
-                    `home_notice_${notice.id}_${normalizeDate(notice.date)}_${notice.time}`;
+                    `home_notice_${notice.id}_${date}_${notice.time}`;
 
-                if (localStorage.getItem(key)) {
+
+                // すでに通知済みなら終了
+                if (
+                    localStorage.getItem(key)
+                ) {
                     return;
                 }
 
-                new Notification("🔔 ClaireLife", {
-                    body: notice.text || "新しい通知があります"
-                });
 
-                localStorage.setItem(key, "true");
+                // 通知を表示
+                new Notification(
+                    "🔔 ClaireLife",
+                    {
+                        body:
+                            notice.text ||
+                            "新しい通知があります"
+                    }
+                );
+
+
+                // 通知済みとして保存
+                localStorage.setItem(
+                    key,
+                    "true"
+                );
+
+
+                console.log(
+                    "通知を送信:",
+                    notice.text
+                );
 
             }
 
         });
 
 
-        // ================================
+        // ===================================
         // 📝 提出物
-        // ================================
+        // ===================================
 
         const submitSnapshot =
             await getDocs(
@@ -602,44 +646,78 @@ async function checkHomeNotifications() {
                 ...docSnap.data()
             }));
 
+
         submits.forEach(item => {
 
+            // 日付または時間がなければ終了
             if (!item.date || !item.time) {
                 return;
             }
 
+
+            const date =
+                normalizeDate(item.date);
+
+
             const target =
                 new Date(
-                    `${normalizeDate(item.date)}T${item.time}:00`
+                    `${date}T${item.time}:00`
                 );
 
-            const diff =
-                now.getTime() - target.getTime();
 
-            // 指定時刻から30秒以内
-            if (diff >= 0 && diff < 30000) {
+            const diff =
+                now.getTime() -
+                target.getTime();
+
+
+            // 指定時刻から2分以内
+            if (
+                diff >= 0 &&
+                diff < 120000
+            ) {
 
                 const key =
-                    `home_submit_${item.id}_${normalizeDate(item.date)}_${item.time}`;
+                    `home_submit_${item.id}_${date}_${item.time}`;
 
-                if (localStorage.getItem(key)) {
+
+                // すでに通知済みなら終了
+                if (
+                    localStorage.getItem(key)
+                ) {
                     return;
                 }
 
-                new Notification("📝 ClaireLife", {
-                    body: `提出物：${item.title}`
-                });
 
-                localStorage.setItem(key, "true");
+                // 通知を表示
+                new Notification(
+                    "📝 ClaireLife",
+                    {
+                        body:
+                            `提出物：${item.title}`
+                    }
+                );
+
+
+                // 通知済みとして保存
+                localStorage.setItem(
+                    key,
+                    "true"
+                );
+
+
+                console.log(
+                    "提出物通知を送信:",
+                    item.title
+                );
 
             }
 
         });
 
 
-        // ================================
+        // ===================================
         // 📚 時間割
-        // ================================
+        // ===================================
 
         const weekDays = [
             "日",
@@ -651,46 +729,66 @@ async function checkHomeNotifications() {
             "土"
         ];
 
+
         let targetDay = "";
         let type = "";
 
-        // ----------------------------
+
+        // ===================================
         // 前日の19:00
         // → 明日の時間割
-        // ----------------------------
+        // ===================================
 
-        if (hour === 19 && minute === 0) {
+        if (
+            now.getHours() === 19 &&
+            now.getMinutes() === 0
+        ) {
 
             const tomorrow =
                 new Date(now);
+
 
             tomorrow.setDate(
                 tomorrow.getDate() + 1
             );
 
+
             targetDay =
-                weekDays[tomorrow.getDay()];
+                weekDays[
+                    tomorrow.getDay()
+                ];
+
 
             type = "tomorrow";
 
         }
 
-        // ----------------------------
+
+        // ===================================
         // 当日の8:00
         // → 今日の時間割
-        // ----------------------------
+        // ===================================
 
-        else if (hour === 8 && minute === 0) {
+        else if (
+            now.getHours() === 8 &&
+            now.getMinutes() === 0
+        ) {
 
             targetDay =
-                weekDays[now.getDay()];
+                weekDays[
+                    now.getDay()
+                ];
+
 
             type = "today";
 
         }
 
 
-        // 土日なら終了
+        // ===================================
+        // 土日なら時間割通知なし
+        // ===================================
+
         if (
             targetDay !== "" &&
             targetDay !== "土" &&
@@ -702,56 +800,88 @@ async function checkHomeNotifications() {
                     userCollection("schedules")
                 );
 
+
             const scheduleDoc =
                 scheduleSnapshot.docs.find(
                     docSnap =>
                         docSnap.id === targetDay
                 );
 
+
             if (scheduleDoc) {
 
                 const data =
                     scheduleDoc.data();
 
+
                 const subjects =
                     data.subjects || [];
 
+
                 const text =
                     subjects
-                        .map((subject, index) => {
+                        .map(
+                            (subject, index) => {
 
-                            if (!subject) {
-                                return "";
+                                if (!subject) {
+                                    return "";
+                                }
+
+
+                                return (
+                                    `${index + 1}時間目：${subject}`
+                                );
+
                             }
-
-                            return `${index + 1}時間目：${subject}`;
-
-                        })
-                        .filter(text => text !== "")
+                        )
+                        .filter(
+                            text => text !== ""
+                        )
                         .join("\n");
+
 
                 if (text) {
 
                     const dateKey =
-                        `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+                        `${now.getFullYear()}-${String(
+                            now.getMonth() + 1
+                        ).padStart(2, "0")}-${String(
+                            now.getDate()
+                        ).padStart(2, "0")}`;
+
 
                     const key =
                         `home_schedule_${type}_${dateKey}_${targetDay}`;
 
-                    if (!localStorage.getItem(key)) {
+
+                    // まだ通知していなければ通知
+                    if (
+                        !localStorage.getItem(key)
+                    ) {
 
                         const title =
                             type === "tomorrow"
                                 ? "📚 明日の時間割"
                                 : "📚 今日の時間割";
 
-                        new Notification(title, {
-                            body: text
-                        });
+
+                        new Notification(
+                            title,
+                            {
+                                body: text
+                            }
+                        );
+
 
                         localStorage.setItem(
                             key,
                             "true"
+                        );
+
+
+                        console.log(
+                            "時間割通知を送信:",
+                            title
                         );
 
                     }
@@ -784,7 +914,10 @@ setInterval(
 );
 
 
+// ===================================
 // ホームを開いたときにもチェック
+// ===================================
+
 setTimeout(
     checkHomeNotifications,
     1000

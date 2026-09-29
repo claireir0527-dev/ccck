@@ -51,8 +51,20 @@
         onblur="saveName()"
     >
 
+<!-- 通知設定 -->
 
-    <br><br>
+<button
+    id="notificationPermissionButton"
+    class="back-btn"
+    type="button"
+>
+    通知を許可する
+</button>
+
+<p id="notificationStatus"></p>
+
+<br>
+
 
 
     <!-- 戻る -->
@@ -89,7 +101,36 @@
 <script src="js/setting.js"></script>
 
 <script type="module" src="js/auth-guard.js"></script>
+<script type="module">
+    import { requestNotificationPermission } from "./js/firebase.js";
 
+    const button =
+        document.getElementById("notificationPermissionButton");
+
+    const status =
+        document.getElementById("notificationStatus");
+
+    if (button) {
+
+        button.addEventListener("click", async () => {
+
+            status.textContent = "通知設定中…";
+
+            const token =
+                await requestNotificationPermission();
+
+            if (token) {
+                status.textContent =
+                    "✅ 通知が許可されました";
+            } else {
+                status.textContent =
+                    "❌ 通知を設定できませんでした";
+            }
+
+        });
+
+    }
+</script>
 <script type="module" src="js/logout.js"></script>
 
 

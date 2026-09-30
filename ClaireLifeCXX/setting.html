@@ -61,7 +61,7 @@
     通知を許可する
 </button>
 
-<p id="notificationStatus"></p>
+<p id="notificationStatus">通知：未設定</p>
 
 <br>
 
@@ -112,21 +112,28 @@
 
     if (button) {
 
+        if ("Notification" in window &&
+            Notification.permission === "granted") {
+            status.textContent = "✅ 通知は許可されています";
+        }
+
         button.addEventListener("click", async () => {
 
             status.textContent = "通知設定中…";
+            button.disabled = true;
 
             const token =
                 await requestNotificationPermission();
 
             if (token) {
                 status.textContent =
-                    "✅ 通知が許可されました";
+                    "✅ 通知が許可され、Firebaseに登録されました";
             } else {
                 status.textContent =
                     "❌ 通知を設定できませんでした";
             }
 
+            button.disabled = false;
         });
 
     }

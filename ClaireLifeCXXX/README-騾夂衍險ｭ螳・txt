@@ -1,0 +1,33 @@
+ClaireLifeCXX Firebase Messaging 一斉通知版
+
+この版はFirebaseコンソールの「トピック送信」を使わず、Cloud Functionsから
+Firestoreに登録された現在のFCMトークンへ直接送信します。
+
+動作：
+・設定画面で通知を許可すると、そのユーザーのfcmTokensに現在のブラウザを1件だけ登録
+・同じユーザーが再登録した場合、古いfcmTokensを削除してから現在の1件だけ保存
+・noticesが追加されると全登録端末へ1回送信
+・submitsが追加されると全登録端末へ1回送信
+・FCMで無効になったトークンは自動削除
+・同じFirestoreイベントが再試行されてもnotificationLogsで二重送信を抑止
+
+重要：
+1. この版をGitHub PagesなどHTTPSで公開してください。
+2. FirebaseコンソールのMessagingから「トピック」へ送るテストは、この方式では使わないでください。
+3. Cloud Functionsをデプロイする必要があります。Cloud Functionsの利用には課金プラン(Blaze)が必要になる場合があります。
+4. Firebase CLIがPCにない場合は、Firebase/Google CloudのCloud Shellを使えます。
+
+Cloud Shellでの基本手順：
+1) ZIPをCloud Shellへアップロードして展開
+2) 展開したフォルダへ移動
+3) functionsフォルダで npm install
+4) firebase deploy --only functions
+
+デプロイ後：
+1) ClaireLifeCXXをGitHub Pagesへ更新
+2) 各端末でログイン
+3) 設定→通知を許可
+4) 以後、提出物または通知を新規追加すると全登録端末へ通知
+
+なお、古いトピック登録が残っていても、Cloud Functionsの直接送信ではそれらへ送信しません。
+ただしFirebaseコンソールから古いトピックへ送信すると、古い登録にも届く場合があります。

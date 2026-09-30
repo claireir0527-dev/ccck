@@ -1,0 +1,16 @@
+{
+  "name": "clairelife-functions",
+  "description": "ClaireLife Firebase Cloud Functions for FCM",
+  "engines": {
+    "node": "22"
+  },
+  "main": "index.js",
+  "scripts": {
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.6.0"
+  },
+  "private": true
+}

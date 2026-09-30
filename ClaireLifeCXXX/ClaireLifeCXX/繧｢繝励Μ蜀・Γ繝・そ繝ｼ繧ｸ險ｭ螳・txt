@@ -1,0 +1,22 @@
+【ClaireLifeCXX：FCM＋アプリ内メッセージ】
+
+FCM：アプリを閉じていても通知を受け取る
+アプリ内メッセージ：ClaireLifeを開いているときに画面中央に表示
+
+Firebaseコンソールの Firestore Database で次のドキュメントを作成します。
+
+コレクション：appMessages
+ドキュメントID：current
+
+フィールド例：
+active      true
+messageId   20260930-01
+title       学校からのお知らせ
+body        明日は体育祭です！
+buttonText  カレンダーを見る
+link        calendar.html
+
+表示を止める：active を false
+新しいメッセージを表示：messageId を新しい値に変更
+
+※Firebase公式のIn-App MessagingはWeb版ClaireLifeCXXでは利用できないため、WebではこのFirestore方式のアプリ内メッセージを使用しています。

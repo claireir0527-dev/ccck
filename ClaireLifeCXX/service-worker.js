@@ -71,7 +71,7 @@ self.addEventListener("notificationclick", (event) => {
 // ClaireLife PWAキャッシュ
 // ===================================
 
-const CACHE_NAME = "school-app-v4";
+const CACHE_NAME = "school-app-v5-fcm-reset";
 const files = [
     "index.html",
     "css/style.css"

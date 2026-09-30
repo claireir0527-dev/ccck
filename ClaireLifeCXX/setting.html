@@ -63,6 +63,9 @@
 
 <p id="notificationStatus">通知：未設定</p>
 
+<button id="resetNotificationButton" class="back-btn" type="button">通知登録をリセット</button>
+<p style="font-size:12px;">通知が何回も届くときに一度押してください。</p>
+
 <br>
 
 
@@ -102,13 +105,27 @@
 
 <script type="module" src="js/auth-guard.js"></script>
 <script type="module">
-    import { requestNotificationPermission } from "./js/firebase.js";
+    import { requestNotificationPermission, resetFcmRegistration } from "./js/firebase.js";
 
     const button =
         document.getElementById("notificationPermissionButton");
 
     const status =
         document.getElementById("notificationStatus");
+
+    const resetButton = document.getElementById("resetNotificationButton");
+
+    if (resetButton) {
+        resetButton.addEventListener("click", async () => {
+            resetButton.disabled = true;
+            status.textContent = "通知登録をリセット中…";
+            const ok = await resetFcmRegistration();
+            status.textContent = ok
+                ? "✅ リセット完了。ページを再読み込みしてから通知を許可してください"
+                : "❌ リセットできませんでした";
+            resetButton.disabled = false;
+        });
+    }
 
     if (button) {
 

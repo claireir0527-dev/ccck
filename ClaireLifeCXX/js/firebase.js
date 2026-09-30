@@ -16,6 +16,7 @@ import {
 import {
     getMessaging,
     getToken,
+    deleteToken,
     onMessage
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-messaging.js";
 
@@ -133,6 +134,44 @@ async function saveFcmToken(token) {
     );
 
     return tokenId;
+}
+
+// ===================================
+// FCM登録リセット
+// ===================================
+async function resetFcmRegistration() {
+    try {
+        // 現在のFCMトークンを明示的に削除
+        try {
+            await deleteToken(messaging);
+        } catch (e) {
+            console.warn("現在のFCMトークン削除をスキップ:", e);
+        }
+
+        // このアプリのService Workerを一度解除
+        if ("serviceWorker" in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (const registration of registrations) {
+                try {
+                    await registration.unregister();
+                } catch (e) {
+                    console.warn("Service Worker解除をスキップ:", e);
+                }
+            }
+        }
+
+        // 古いCacheも削除
+        if ("caches" in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(key => caches.delete(key)));
+        }
+
+        console.log("FCM通知登録をリセットしました");
+        return true;
+    } catch (error) {
+        console.error("FCMリセットエラー:", error);
+        return false;
+    }
 }
 
 // ===================================
@@ -300,5 +339,6 @@ export {
     userDoc,
     waitForUser,
     requestNotificationPermission,
-    saveFcmToken
+    saveFcmToken,
+    resetFcmRegistration
 };

@@ -6,7 +6,7 @@ importScripts(
 );
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBrsFoQdQTiNrS5OcaBhWf9UGSH77Iv7OU",
+    apiKey: "AIzaSyBrsFoQdQTiNSr5OcaBhWf9UGSH77Iv7OU",
     authDomain: "cleair-lab.firebaseapp.com",
     projectId: "cleair-lab",
     storageBucket: "cleair-lab.firebasestorage.app",
@@ -16,26 +16,62 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+// IMPORTANT:
+// 通知ペイロード（notification）を含むFCMは、ブラウザ/Firebaseが
+// バックグラウンドで自動表示します。ここでshowNotification()すると二重表示になるため、
+// notificationペイロードはここでは表示しません。
+// data-only通知だけを、このService Workerで1回だけ表示します。
 messaging.onBackgroundMessage((payload) => {
-    console.log("バックグラウンド通知:", payload);
+    console.log("FCMバックグラウンド通知:", payload);
 
-    // notificationペイロードはFCMが自動で表示するため、
-    // ここではshowNotificationを実行しません。
-    // これにより同じ通知が2回表示されるのを防ぎます。
-
-    // dataのみのメッセージを送った場合だけ、ここで表示します。
-    if (!payload.notification && payload.data) {
-        const title = payload.data.title || "ClaireLife";
-        const options = {
-            body: payload.data.body || "新しい通知があります",
-            tag: payload.data.tag || "clairelife-notification"
-        };
-
-        self.registration.showNotification(title, options);
+    if (payload.notification) {
+        return;
     }
-});
-const CACHE_NAME = "school-app-v2";
 
+    const data = payload.data || {};
+    const title = data.title || "ClaireLife";
+    const body = data.body || "新しい通知があります";
+    const messageId = payload.messageId || data.messageId || `${title}:${body}`;
+
+    self.registration.showNotification(title, {
+        body,
+        icon: "images/icon.jpg",
+        tag: `clairelife-${messageId}`,
+        renotify: false,
+        data: {
+            link: data.link || "index.html"
+        }
+    });
+});
+
+self.addEventListener("notificationclick", (event) => {
+    event.notification.close();
+
+    const targetUrl = event.notification?.data?.link || "index.html";
+
+    event.waitUntil(
+        clients.matchAll({
+            type: "window",
+            includeUncontrolled: true
+        }).then((clientList) => {
+            for (const client of clientList) {
+                if ("focus" in client) {
+                    return client.navigate(targetUrl).then(() => client.focus());
+                }
+            }
+
+            if (clients.openWindow) {
+                return clients.openWindow(targetUrl);
+            }
+        })
+    );
+});
+
+// ===================================
+// ClaireLife PWAキャッシュ
+// ===================================
+
+const CACHE_NAME = "school-app-v4";
 const files = [
     "index.html",
     "css/style.css"
@@ -62,8 +98,6 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-
-    // JavaScriptは常に最新を取得する
     if (event.request.url.includes("/js/")) {
         event.respondWith(
             fetch(event.request).catch(() => caches.match(event.request))
@@ -73,12 +107,7 @@ self.addEventListener("fetch", event => {
 
     event.respondWith(
         caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-            .catch(() => {
-                return caches.match("index.html");
-            })
+            .then(response => response || fetch(event.request))
+            .catch(() => caches.match("index.html"))
     );
-
 });

@@ -255,43 +255,43 @@ function changeIcon(input) {
         input.value;
 
 
-    if (subject.includes("数学")) {
+    if (subject.includes("数学") || subject.includes("関数")) {
 
         icon.textContent = "📐";
 
     }
 
-    else if (subject.includes("国語")) {
+    else if (subject.includes("国語") || subject.includes("言語") || subject.includes("古典") || subject.includes("表現研究")) {
 
         icon.textContent = "🔤";
 
     }
 
-    else if (subject.includes("英語")) {
+    else if (subject.includes("英語") || subject.includes("英会話") || subject.includes("論理表現") || subject.includes("コミュニケーション")) {
 
         icon.textContent = "ABC";
 
     }
 
-    else if (subject.includes("体育")) {
+    else if (subject.includes("体育") || subject.includes("武道") || subject.includes("スポーツ")) {
 
         icon.textContent = "🏃";
 
     }
 
-    else if (subject.includes("科学")) {
+    else if (subject.includes("科学") || subject.includes("物理") || subject.includes("化学") || subject.includes("地学") || subject.includes("生物") || subject.includes("生命")) {
 
         icon.textContent = "🔬";
 
     }
 
-    else if (subject.includes("社会")) {
+    else if (subject.includes("公共")) {
 
         icon.textContent = "🌏";
 
     }
 
-    else if (subject.includes("情報")) {
+    else if (subject.includes("情報") || subject.includes("ソフトウェア活用") || subject.includes("プログラミング") || subject.includes("マルチメディア") || subject.includes("情報セキュリティ基礎") || subject.includes("開発") || subject.includes("生活")) {
 
         icon.textContent = "💻";
 
@@ -321,21 +321,26 @@ function changeIcon(input) {
 
     }
 
-    else if (subject.includes("地学")) {
+    else if (subject.includes("音楽")) {
 
-        icon.textContent = "🌋";
-
-    }
-
-    else if (subject.includes("物理")) {
-
-        icon.textContent = "⚛️";
+        icon.textContent = "🎵";
 
     }
 
-    else if (subject.includes("生物")) {
+    else if (subject.includes("美術")) {
 
-        icon.textContent = "🧬";
+        icon.textContent = "🎨";
+
+    }
+
+    else if (subject.includes("書道")) {
+
+        icon.textContent = "🖌";
+
+    }
+     else if (subject.includes("家庭") || subject.includes("生活文化")) {
+
+        icon.textContent = "🍳";
 
     }
 
@@ -351,6 +356,39 @@ function changeIcon(input) {
 
     }
 
+    else if (subject.includes("商品開発と流通")) {
+
+        icon.textContent = "🧾";
+
+    }
+    else if (subject.includes("簿記") || subject.includes("財務会計") || subject.includes("原価計算")) {
+
+        icon.textContent = "🧮";
+
+    }
+    else if (subject.includes("観光とマーケティング")) {
+
+        icon.textContent = "🚄";
+
+    }
+
+    else if (subject.includes("オフィススキル")) {
+
+        icon.textContent = "🏢";
+
+    }
+
+     else if (subject.includes("総合的な探求の時間")) {
+
+        icon.textContent = "👌";
+
+    }
+
+    else if (subject.includes("ホームルーム")) {
+
+        icon.textContent = "🏠";
+
+    }
     else {
 
         icon.textContent = "📖";

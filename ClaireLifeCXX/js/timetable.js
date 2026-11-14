@@ -273,7 +273,7 @@ function changeIcon(input) {
 
     }
 
-    else if (subject.includes("体育") || subject.includes("武道") || subject.includes("スポーツ")) {
+    else if (subject.includes("体育") || subject.includes("保健") || subject.includes("武道") || subject.includes("スポーツ")) {
 
         icon.textContent = "🏃";
 
@@ -378,7 +378,7 @@ function changeIcon(input) {
 
     }
 
-     else if (subject.includes("総合的な探求の時間")) {
+     else if (subject.includes("総合研究")) {
 
         icon.textContent = "👌";
 

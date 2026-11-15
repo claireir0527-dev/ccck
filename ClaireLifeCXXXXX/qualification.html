@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>資格 | ClaireLife</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="phone short-page">
+
+        <div class="content">
+　<header style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+
+    <h2 style="margin: 0;">資格</h2>
+
+    <div style="
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    ">
+
+        <a href="qualification-status.html"
+           style="
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               text-decoration: none;
+           ">
+            <button class="setting-btn">📋</button>
+            <span style="font-size: 11px; color: #555;">資格状況</span>
+        </a>
+
+        <a href="index.html">
+            <button class="setting-btn">🏠</button>
+        </a>
+
+    </div>
+</header>
+            <h3>取得した資格</h3>
+
+            <div id="qualificationList">
+                読み込み中...
+            </div>
+
+            <button
+                class="add-btn"
+                onclick="location.href='qualification-add.html'">
+                ＋ 資格追加
+            </button>
+
+            <button
+                class="back"
+                onclick="location.href='index.html'">
+                ホームに戻る
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/qualification.js"></script>
+<script type="module" src="js/auth-guard.js"></script>
+
+</body>
+</html>

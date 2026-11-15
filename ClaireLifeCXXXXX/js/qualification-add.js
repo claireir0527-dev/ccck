@@ -146,7 +146,7 @@ type.addEventListener("change", () => {
     ]);
 
     // 商業経済検定
-    if (type.value === "商業経済検定") {
+    if (type.value === "商業経済検定試験") {
 
         setGrades([
             "ビジネス基礎",
@@ -158,37 +158,37 @@ type.addEventListener("change", () => {
     }
 
     // 簿記実務検定
-    if (type.value === "簿記実務検定") {
+    if (type.value === "簿記実務検定試験") {
         // 1級のときだけ科目選択を表示
         accountingArea.style.display = "none";
     }
 
     // 情報処理検定
-    if (type.value === "情報処理検定") {
+    if (type.value === "情報処理検定試験") {
 
         informationArea.style.display = "block";
         gradeArea.style.display = "none";
     }
 
     // ビジネス計算実務検定
-    if (type.value === "ビジネス計算実務検定") {
+    if (type.value === "ビジネス計算実務検定試験") {
 
         businessCalcArea.style.display = "block";
         gradeArea.style.display = "none";
     }
 
     // ビジネス文書実務検定
-    if (type.value === "ビジネス文書実務検定") {
+    if (type.value === "ビジネス文書実務検定試験") {
 
         businessDocumentArea.style.display = "block";
         gradeArea.style.display = "none";
     }
 // ビジネスコミュニケーション検定
-if (type.value === "ビジネスコミュニケーション検定") {
+if (type.value === "ビジネスコミュニケーション検定試験") {
     gradeArea.style.display = "none";
 }
     // 会計実務検定
-    if (type.value === "会計実務検定") {
+    if (type.value === "会計実務検定試験") {
 
     accountingExamArea.style.display = "block";
 
@@ -203,7 +203,7 @@ if (type.value === "ビジネスコミュニケーション検定") {
 grade.addEventListener("change", () => {
 
     if (
-        type.value === "簿記実務検定" &&
+        type.value === "簿記実務検定試験" &&
         grade.value === "1級"
     ) {
         accountingArea.style.display = "block";
@@ -299,15 +299,15 @@ async function loadQualification() {
     const data = snapshot.data();
 
     const knownTypes = [
-        "商業経済検定",
-        "簿記実務検定",
-        "情報処理検定",
-        "ビジネス文書実務検定",
-        "珠算・電卓実務検定",
-        "英語検定",
-        "会計実務検定",
-        "ビジネス計算実務検定",
-        "ビジネスコミュニケーション検定",
+        "商業経済検定試験",
+        "簿記実務検定試験",
+        "情報処理検定試験",
+        "ビジネス文書実務検定試験",
+        "珠算・電卓実務検定試験",
+        "英語検定試験",
+        "会計実務検定試験",
+        "ビジネス計算実務検定試験",
+        "ビジネスコミュニケーション検定試験",
         "会計"
     ];
 
@@ -323,12 +323,12 @@ async function loadQualification() {
     type.dispatchEvent(new Event("change"));
 
     // 商業経済検定
-    if (data.name === "商業経済検定") {
+    if (data.name === "商業経済検定試験") {
         grade.value = data.grade || "";
     }
 
     // 簿記実務検定
-    if (data.name === "簿記実務検定") {
+    if (data.name === "簿記実務検定試験") {
 
         grade.value = data.grade || "";
 
@@ -338,7 +338,7 @@ async function loadQualification() {
     }
 
     // 情報処理検定
-    if (data.name === "情報処理検定") {
+    if (data.name === "情報処理検定試験") {
 
         informationSubject.value = data.subject || "";
 
@@ -348,7 +348,9 @@ async function loadQualification() {
     }
 
     // ビジネス計算実務検定
-    if (data.name === "ビジネス計算実務検定") {
+    if (data.name === "ビジネス計算実務検定試験"
+        || data.name === "ビジネス計算実務検定"
+    ) {
 
         businessCalcMethod.value = data.method || "";
         businessCalcMethod.dispatchEvent(new Event("change"));
@@ -360,7 +362,7 @@ async function loadQualification() {
     }
 
     // ビジネス文書実務検定
-    if (data.name === "ビジネス文書実務検定") {
+    if (data.name === "ビジネス文書実務検定試験") {
 
         businessDocumentType.value = data.documentType || "";
         businessDocumentType.dispatchEvent(new Event("change"));
@@ -369,7 +371,7 @@ async function loadQualification() {
     }
 
     // 会計実務検定
-    if (data.name === "会計実務検定") {
+    if (data.name === "会計実務検定試験") {
 
         accountingExam.value = data.subject || "";
         grade.value = "無";
@@ -378,12 +380,12 @@ async function loadQualification() {
     // その他・通常の資格
     if (
         ![
-            "商業経済検定",
-            "簿記実務検定",
-            "情報処理検定",
-            "ビジネス計算実務検定",
-            "ビジネス文書実務検定",
-            "会計実務検定"
+            "商業経済検定試験",
+            "簿記実務検定試験",
+            "情報処理検定試験",
+            "ビジネス計算実務検定試験",
+            "ビジネス文書実務検定試験",
+            "会計実務検定試験"
         ].includes(data.name)
     ) {
         grade.value = data.grade || "";
@@ -422,7 +424,7 @@ saveButton.addEventListener("click", async () => {
 
     // 情報処理検定のチェック
     if (
-        selectedType === "情報処理検定" &&
+        selectedType === "情報処理検定試験" &&
         !informationSubject.value
     ) {
         await showNotice("科目を選んでね。");
@@ -431,7 +433,7 @@ saveButton.addEventListener("click", async () => {
 
     // ビジネス計算のチェック
     if (
-        selectedType === "ビジネス計算実務検定" &&
+        selectedType === "ビジネス計算実務検定試験" &&
         (!businessCalcMethod.value || !businessCalcType.value)
     ) {
         await showNotice("計算方法と検定内容を選んでね。");
@@ -440,7 +442,7 @@ saveButton.addEventListener("click", async () => {
 
     // ビジネス文書のチェック
     if (
-        selectedType === "ビジネス文書実務検定" &&
+        selectedType === "ビジネス文書実務検定試験" &&
         !businessDocumentType.value
     ) {
         await showNotice("検定内容を選んでね。");
@@ -449,7 +451,7 @@ saveButton.addEventListener("click", async () => {
 
     // 会計実務検定のチェック
     if (
-        selectedType === "会計実務検定" &&
+        selectedType === "会計実務検定試験" &&
         !accountingExam.value
     ) {
         await showNotice("検定試験を選んでね。");
@@ -460,8 +462,8 @@ saveButton.addEventListener("click", async () => {
 
 // 級が必要な資格だけチェック
 if (
-    selectedType !== "会計実務検定" &&
-    selectedType !== "ビジネスコミュニケーション検定" &&
+    selectedType !== "会計実務検定試験" &&
+    selectedType !== "ビジネスコミュニケーション検定試験" &&
     !grade.value
 ) {
     await showNotice("級・レベルを選んでね。");
@@ -469,7 +471,7 @@ if (
 }
     // 簿記1級の科目チェック
     if (
-        selectedType === "簿記実務検定" &&
+        selectedType === "簿記実務検定試験" &&
         grade.value === "1級" &&
         !accountingSubject.value
     ) {
@@ -485,32 +487,32 @@ if (
         name: name,
 
         grade:
-    selectedType === "会計実務検定" ||
-    selectedType === "ビジネスコミュニケーション検定"
+    selectedType === "会計実務検定試験" ||
+    selectedType === "ビジネスコミュニケーション検定試験"
         ? ""
         : grade.value.trim(),
         subject:
-            selectedType === "情報処理検定"
+            selectedType === "情報処理検定試験"
                 ? informationSubject.value
-                : selectedType === "簿記実務検定" &&
+                : selectedType === "簿記実務検定試験" &&
                   grade.value === "1級"
                     ? accountingSubject.value
-                    : selectedType === "会計実務検定"
+                    : selectedType === "会計実務検定試験"
                         ? accountingExam.value
                         : "",
 
         method:
-            selectedType === "ビジネス計算実務検定"
+            selectedType === "ビジネス計算実務検定試験"
                 ? businessCalcMethod.value
                 : "",
 
         calculationType:
-            selectedType === "ビジネス計算実務検定"
+            selectedType === "ビジネス計算実務検定試験"
                 ? businessCalcType.value
                 : "",
 
         documentType:
-            selectedType === "ビジネス文書実務検定"
+            selectedType === "ビジネス文書実務検定試験"
                 ? businessDocumentType.value
                 : "",
 

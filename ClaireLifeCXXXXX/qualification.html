@@ -42,11 +42,42 @@
             <span style="font-size: 11px; color: #555;">資格状況</span>
         </a>
 
-        <a href="index.html">
-            <button class="setting-btn">🏠</button>
-        </a>
-
+       <a href="qualification-medals.html"
+   style="
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       text-decoration: none;
+   ">
+    <button class="setting-btn">🏅</button>
+    <span style="font-size: 11px; color: #555;">メダル</span>
+</a>
     </div>
+
+<style>
+.fixed-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.fixed-buttons button {
+    width: 100%;
+    margin: 0;
+    padding: 12px 5px;
+}
+/* ボタンと資格一覧が重ならないようにする */
+.content {
+    padding-bottom: 150px;
+}
+</style>
+
 </header>
             <h3>取得した資格</h3>
 
@@ -54,17 +85,21 @@
                 読み込み中...
             </div>
 
-            <button
-                class="add-btn"
-                onclick="location.href='qualification-add.html'">
-                ＋ 資格追加
-            </button>
+            <div class="fixed-buttons">
 
-            <button
-                class="back"
-                onclick="location.href='index.html'">
-                ホームに戻る
-            </button>
+    <button
+        class="add-btn"
+        onclick="location.href='qualification-add.html'">
+        ＋ 資格追加
+    </button>
+
+    <button
+        class="back"
+        onclick="location.href='index.html'">
+        ホームに戻る
+    </button>
+
+</div>
 
         </div>
 

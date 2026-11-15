@@ -185,7 +185,11 @@ row1.appendChild(subject1);
 
 const status1 = document.createElement("td");
 const acquired1 = has("簿記実務検定試験", q =>
-    q.grade === "1級" && q.subject === "会計"
+    q.grade === "1級" &&
+    (
+        q.subject === "会計" ||
+        q.subject === "両方"
+    )
 );
 status1.textContent = acquired1 ? "〇" : "－";
 if (acquired1) status1.className = "acquired";
@@ -203,7 +207,11 @@ row2.appendChild(subject2);
 
 const status2 = document.createElement("td");
 const acquired2 = has("簿記実務検定試験", q =>
-    q.grade === "1級" && q.subject === "原価計算"
+    q.grade === "1級" &&
+    (
+        q.subject === "原価計算" ||
+        q.subject === "両方"
+    )
 );
 status2.textContent = acquired2 ? "〇" : "－";
 if (acquired2) status2.className = "acquired";
@@ -429,7 +437,7 @@ addTable(
             {
                 label: "ビジネスコミュニケーション",
                 values: [
-                    has("ビジネスコミュニケーション検定", () => true)
+                    has("ビジネスコミュニケーション検定試験", () => true)
                 ]
             }
         ]

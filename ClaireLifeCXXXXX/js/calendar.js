@@ -654,13 +654,20 @@ function selectDay(day) {
                     ⭐ ${escapeHtml(item.title)}
                 </div>
 
-                <div class="task-date">
-                    📅 ${escapeHtml(startDate)}
-                    ${endDate !== startDate
-                        ? `～ ${escapeHtml(endDate.slice(5))}`
-                        : ""}
-                    ${item.time ? `　⏰ ${escapeHtml(item.time)}` : ""}
-                </div>
+              <div class="task-date">
+
+    📅 ${escapeHtml(startDate)}
+    ${endDate !== startDate
+        ? `～ ${escapeHtml(endDate.slice(5))}`
+        : ""}
+
+    ${
+        item.time
+        ? `<br>⏰ ${escapeHtml(item.time)}`
+        : ""
+    }
+
+</div>
 
                 ${item.memo
                     ? `<div>${escapeHtml(item.memo)}</div>`

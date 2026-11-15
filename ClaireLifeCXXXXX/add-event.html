@@ -17,6 +17,39 @@
 .event-save { width:100%; border:0; border-radius:13px; padding:15px; margin-top:12px; background:#6b3df5; color:#fff; font-size:16px; font-weight:bold; }
 .event-back { display:block; text-align:center; margin-top:14px; color:#6b3df5; text-decoration:none; }
 .event-error { color:#c62828; font-size:14px; min-height:20px; }
+
+/* スマホで入力欄がはみ出さないようにする */
+.event-page {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.event-field {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.event-field input,
+.event-field textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* 時間入力欄 */
+.event-field input[type="time"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>

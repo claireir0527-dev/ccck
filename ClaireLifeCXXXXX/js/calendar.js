@@ -569,83 +569,55 @@ function selectDay(day) {
 
     submits.forEach(item => {
 
-        if (
-            normalizeDate(
-                item.date
-            ) === date
-        ) {
+    if (normalizeDate(item.date) === date) {
 
-            submitText += `
+        submitText += `
+            <div class="task-card">
 
-                <div class="task-card">
+                <div class="task-title">
+                    ${escapeHtml(item.title)}
+                </div>
 
-                    <div class="task-title">
+                <div class="task-date">
+                    📅 ${escapeHtml(normalizeDate(item.date))}
+                </div>
 
-                        ${escapeHtml(
-                            item.title
-                        )}
+                <div class="task-date">
+                    ⏰ ${item.time ? escapeHtml(item.time) : "時間未設定"}
+                </div>
 
-                    </div>
+                <div class="task-buttons calendar-buttons">
 
+                    <button
+                        class="edit-btn"
+                        onclick="editSubmit('${item.id}')"
+                    >✏️</button>
 
-                    <div class="task-date">
-
-                        📅
-                        ${escapeHtml(
-                            normalizeDate(
-                                item.date
-                            )
-                        )}
-
-                        ${
-                            item.time
-                            ? `　⏰ ${escapeHtml(item.time)}`
-                            : ""
-                        }
-
-                    </div>
-
-
-                    <div class="task-buttons calendar-buttons">
-
-                        <button
-                            class="edit-btn"
-                            onclick="editSubmit('${item.id}')"
-                        >
-                            ✏️
-                        </button>
-
-
-                        <button
-                            class="done-btn"
-                            onclick="calendarDeleteSubmit('${item.id}')"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
+                    <button
+                        class="done-btn"
+                        onclick="calendarDeleteSubmit('${item.id}')"
+                    >🗑️</button>
 
                 </div>
 
-            `;
+            </div>
+        `;
+    }
 
-        }
-
-    });
-
-
+});
     // ===================================
-    // 通知
+    // 予定
     // ===================================
 
     let noticeText = "";
     let eventText = "";
 
-   personalEvents.forEach(item => {
-    if (isEventOnDate(item, date)) {
 
-        const startDate = item.startDate || item.date;
-        const endDate = item.endDate || startDate;
+
+
+personalEvents.forEach(item => {
+
+    if (isEventOnDate(item, date)) {
 
         eventText += `
             <div class="task-card personal-event-card">
@@ -654,55 +626,48 @@ function selectDay(day) {
                     ${escapeHtml(item.title)}
                 </div>
 
-           <div class="task-date" style="
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:12px;
-">
+                <div class="task-date">
+                    📅 ${escapeHtml(normalizeDate(item.date))}
+                </div>
 
-    <span>
-        📅 ${escapeHtml(normalizeDate(item.date))}
-    </span>
-
-    ${
-        item.time
-        ? `<span>⏰ ${escapeHtml(item.time)}</span>`
-        : ""
-    }
-
-</div>
+                <div class="task-date">
+                    ⏰ ${item.time ? escapeHtml(item.time) : "時間未設定"}
+                </div>
 
                 ${item.memo
                     ? `<div>${escapeHtml(item.memo)}</div>`
-                    : ""}
+                    : ""
+                }
 
                 <div class="task-buttons calendar-buttons">
 
                     <button
                         class="edit-btn"
-                        onclick="calendarEditEvent('${item.id}')">
-                        ✏️
-                    </button>
+                        onclick="calendarEditEvent('${item.id}')"
+                    >✏️</button>
 
                     <button
                         class="done-btn"
-                        onclick="calendarDeleteEvent('${item.id}')">
-                        🗑️
-                    </button>
+                        onclick="calendarDeleteEvent('${item.id}')"
+                    >🗑️</button>
 
                 </div>
 
             </div>
         `;
     }
+
 });
+
+// ===================================
+// 通知
+// ===================================
+
 notices.forEach(item => {
 
     if (normalizeDate(item.date) === date) {
 
         noticeText += `
-
             <div class="task-card">
 
                 <div class="task-title">
@@ -710,14 +675,13 @@ notices.forEach(item => {
                 </div>
 
                 <div class="task-date">
-                    📅
-                    ${escapeHtml(normalizeDate(item.date))}
+                    📅 ${escapeHtml(normalizeDate(item.date))}
+                </div>
 
-                    ${
-                        item.time
-                        ? `　⏰ ${escapeHtml(item.time)}`
-                        : ""
-                    }
+                <div class="task-date">
+                    ⏰ ${item.time
+                        ? escapeHtml(item.time)
+                        : "時間未設定"}
                 </div>
 
                 <div class="task-buttons calendar-buttons">
@@ -739,12 +703,10 @@ notices.forEach(item => {
                 </div>
 
             </div>
-
         `;
     }
 
 });
-
     // ===================================
     // 日付の内容を表示
     // ===================================

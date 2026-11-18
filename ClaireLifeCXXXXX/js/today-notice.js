@@ -90,7 +90,7 @@ async function loadTodayNotices() {
 
                     <div>
 
-                        🔔
+                        
                         ${escapeHtml(notice.text)}
 
                         <br>

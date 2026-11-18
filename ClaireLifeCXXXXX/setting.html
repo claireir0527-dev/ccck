@@ -16,9 +16,26 @@
 <body>
 
 <div class="phone short-page">
+<header style="
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+">
 
+    <a href="index.html" style="
+        position:absolute;
+        left:0;
+    ">←</a>
 
-    <h2>⚙️ 設定</h2>
+    <h2 style="
+        margin:0 auto;
+        text-align:center;
+    ">設定</h2>
+
+</header>
+
 
 
     <label for="iconImage">
@@ -121,8 +138,8 @@
             status.textContent = "通知登録をリセット中…";
             const ok = await resetFcmRegistration();
             status.textContent = ok
-                ? "✅ リセット完了。ページを再読み込みしてから通知を許可してください"
-                : "❌ リセットできませんでした";
+                ? "リセット完了。ページを再読み込みしてから通知を許可してください"
+                : "リセットできませんでした";
             resetButton.disabled = false;
         });
     }
@@ -131,7 +148,7 @@
 
         if ("Notification" in window &&
             Notification.permission === "granted") {
-            status.textContent = "✅ 通知は許可されています";
+            status.textContent = " 通知は許可されています";
         }
 
         button.addEventListener("click", async () => {
@@ -144,10 +161,10 @@
 
             if (token) {
                 status.textContent =
-                    "✅ 通知が許可され、Firebaseに登録されました";
+                    "通知が許可され、Firebaseに登録されました";
             } else {
                 status.textContent =
-                    "❌ 通知を設定できませんでした";
+                    "通知を設定できませんでした";
             }
 
             button.disabled = false;

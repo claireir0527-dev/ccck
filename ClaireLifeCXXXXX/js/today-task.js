@@ -87,8 +87,9 @@ async function loadTodayTasks() {
             list.innerHTML += `
 
                 <div class="task-card">
+                  
+                 <div class="task-title">
 
-                    <div class="task-title">
                         ${escapeHtml(item.title)}
                     </div>
 

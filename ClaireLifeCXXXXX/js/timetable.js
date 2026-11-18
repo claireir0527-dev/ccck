@@ -241,161 +241,109 @@ async function loadSchedule() {
 
 function changeIcon(input) {
 
-    const icon =
-        input.parentElement.querySelector(".icon");
+    const subject = input.value.trim();
 
+    let icon = input.parentElement.querySelector(".icon");
 
-    // iconが存在しない場合
-    if (!icon) {
+    if (!icon) return;
+
+    // 空欄なら絵文字
+    if (subject === "") {
+
+        if (icon.tagName !== "SPAN") {
+            icon.outerHTML = '<span class="icon">📖</span>';
+        }
+
         return;
     }
 
-
-    const subject =
-        input.value;
-
+    // 教科が入力されたら画像にする
+let image = null;
 
     if (subject.includes("数学") || subject.includes("関数")) {
-
-        icon.textContent = "📐";
-
+        image = "suugaku.jpg";
     }
-
     else if (subject.includes("国語") || subject.includes("言語") || subject.includes("古典") || subject.includes("表現研究")) {
-
-        icon.textContent = "🔤";
-
+        image = "kokugo.jpg";
     }
-
     else if (subject.includes("英語") || subject.includes("英会話") || subject.includes("論理表現") || subject.includes("コミュニケーション")) {
-
-        icon.textContent = "ABC";
-
+        image = "eigo.jpg";
     }
-
     else if (subject.includes("体育") || subject.includes("保健") || subject.includes("武道") || subject.includes("スポーツ")) {
-
-        icon.textContent = "🏃";
-
+        image = "taiiku.jpg";
     }
-
     else if (subject.includes("科学") || subject.includes("物理") || subject.includes("化学") || subject.includes("地学") || subject.includes("生物") || subject.includes("生命")) {
-
-        icon.textContent = "🔬";
-
+        image = "rika.jpg";
     }
-
     else if (subject.includes("公共")) {
-
-        icon.textContent = "🌏";
-
+        image = "kouminn.jpg";
     }
-
     else if (subject.includes("情報") || subject.includes("ソフトウェア活用") || subject.includes("プログラミング") || subject.includes("マルチメディア") || subject.includes("情報セキュリティ基礎") || subject.includes("開発") || subject.includes("生活")) {
-
-        icon.textContent = "💻";
-
+        image = "?.png";
     }
-
-    else if (subject.includes("開発")) {
-
-        icon.textContent = "⚙️";
-
-    }
-
     else if (subject.includes("地理")) {
-
-        icon.textContent = "🌎";
-
+        image = "?.png";
     }
-
     else if (subject.includes("史")) {
-
-        icon.textContent = "📜";
-
+        image = "?.png";
     }
-
     else if (subject.includes("政治経済")) {
-
-        icon.textContent = "🏛️";
-
+        image = "kouminn.jpg";
     }
-
     else if (subject.includes("音楽")) {
-
-        icon.textContent = "🎵";
-
+        image = "onngaku.jpg";
     }
-
     else if (subject.includes("美術")) {
-
-        icon.textContent = "🎨";
-
+        image = "bizyutu.jpg";
     }
-
     else if (subject.includes("書道")) {
-
-        icon.textContent = "🖌";
-
+        image = "syodou.jpg";
     }
-     else if (subject.includes("家庭") || subject.includes("生活文化")) {
-
-        icon.textContent = "🍳";
-
+    else if (subject.includes("家庭") || subject.includes("生活文化")) {
+        image = "kateika.jpg";
     }
-
-    else if (subject.includes("課題研究")) {
-
-        icon.textContent = "🔎";
-
+    else if (subject.includes("課題研究") ) {
+        image = "?.png";
     }
-
     else if (subject.includes("ビジネス")) {
-
-        icon.textContent = "💼";
-
+        image = "bizinesu.jpg";
     }
-
     else if (subject.includes("商品開発と流通")) {
-
-        icon.textContent = "🧾";
-
+        image = "ma-ke.jpg";
     }
     else if (subject.includes("簿記") || subject.includes("財務会計") || subject.includes("原価計算")) {
-
-        icon.textContent = "🧮";
-
+        image = "kaikei.jpg";
     }
     else if (subject.includes("観光とマーケティング")) {
-
-        icon.textContent = "🚄";
-
+        image = "ma-ke.jpg";
     }
-
     else if (subject.includes("オフィススキル")) {
-
-        icon.textContent = "🏢";
-
+        image = "?.png";
     }
-
-     else if (subject.includes("総合研究")) {
-
-        icon.textContent = "👌";
-
-    }
-
     else if (subject.includes("ホームルーム")) {
-
-        icon.textContent = "🏠";
-
+        image = "?.png";
     }
-    else {
-
-        icon.textContent = "📖";
-
+    else if (subject.includes("総合探究")　|| subject.includes("総合的な探究の時間")) {
+        image = "sougoutannkyuu.jpg";
     }
+
+// 該当する教科がない場合は本の絵文字
+if (image === null) {
+
+    if (icon.tagName !== "SPAN") {
+        icon.outerHTML = '<span class="icon">📖</span>';
+    }
+
+    return;
 }
-
+    // 画像に切り替え
+    if (icon.tagName !== "IMG") {
+        icon.outerHTML = '<img class="icon" alt="教科アイコン">';
+        icon = input.parentElement.querySelector(".icon");
+    }
+    icon.src = "images/" + image;
+    icon.alt = subject + "のアイコン";
+}
 
 // ===================================
 // 曜日を選択

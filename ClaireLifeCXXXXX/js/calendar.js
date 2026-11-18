@@ -651,19 +651,23 @@ function selectDay(day) {
             <div class="task-card personal-event-card">
 
                 <div class="task-title">
-                    ⭐ ${escapeHtml(item.title)}
+                    ${escapeHtml(item.title)}
                 </div>
 
-              <div class="task-date">
+           <div class="task-date" style="
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+">
 
-    📅 ${escapeHtml(startDate)}
-    ${endDate !== startDate
-        ? `～ ${escapeHtml(endDate.slice(5))}`
-        : ""}
+    <span>
+        📅 ${escapeHtml(normalizeDate(item.date))}
+    </span>
 
     ${
         item.time
-        ? `<br>⏰ ${escapeHtml(item.time)}`
+        ? `<span>⏰ ${escapeHtml(item.time)}</span>`
         : ""
     }
 
@@ -693,71 +697,53 @@ function selectDay(day) {
         `;
     }
 });
+notices.forEach(item => {
 
-    notices.forEach(item => {
+    if (normalizeDate(item.date) === date) {
 
-        if (
-            normalizeDate(
-                item.date
-            ) === date
-        ) {
+        noticeText += `
 
-            noticeText += `
+            <div class="task-card">
 
-                <div class="task-card">
+                <div class="task-title">
+                    ${escapeHtml(item.text)}
+                </div>
 
-                    <div class="task-title">
+                <div class="task-date">
+                    📅
+                    ${escapeHtml(normalizeDate(item.date))}
 
-                        🔔
-                        ${escapeHtml(
-                            item.text
-                        )}
+                    ${
+                        item.time
+                        ? `　⏰ ${escapeHtml(item.time)}`
+                        : ""
+                    }
+                </div>
 
-                    </div>
+                <div class="task-buttons calendar-buttons">
 
+                    <button
+                        class="edit-btn"
+                        onclick="editNotice('${item.id}')"
+                    >
+                        ✏️
+                    </button>
 
-                   
-<div class="task-date">
-
-    📅
-    ${escapeHtml(
-        normalizeDate(item.date)
-    )}
-
-    ${
-        item.time
-        ? `<br>⏰ ${escapeHtml(item.time)}`
-        : ""
-    }
-
-</div>
-
-                    <div class="task-buttons calendar-buttons">
-                        <button
-                            class="edit-btn"
-                            onclick="editNotice('${item.id}')"
-                        >
-                            ✏️
-                        </button>
-
-
-                        <button
-                            class="done-btn"
-                            onclick="calendarDeleteNotice('${item.id}')"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
+                    <button
+                        class="done-btn"
+                        onclick="calendarDeleteNotice('${item.id}')"
+                    >
+                        🗑️
+                    </button>
 
                 </div>
 
-            `;
+            </div>
 
-        }
+        `;
+    }
 
-    });
-
+});
 
     // ===================================
     // 日付の内容を表示

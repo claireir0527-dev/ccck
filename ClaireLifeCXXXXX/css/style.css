@@ -2571,3 +2571,13 @@ body.swal2-shown{
     object-fit: contain;
     display: block;
 }
+
+/* スマホの青いリンク文字だけ黒にする */
+@media screen and (max-width: 600px) {
+
+    a:link:not([class]),
+    a:visited:not([class]) {
+        color: #000000;
+    }
+
+}

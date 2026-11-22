@@ -2592,24 +2592,28 @@ body.swal2-shown{
     -webkit-tap-highlight-color: transparent;
 }
 
-/* ===================================
-   スマホ：全ページのリンク文字を黒にする
-=================================== */
-
+/* スマホでリンク文字を黒にする */
 @media screen and (max-width: 768px) {
 
-    a,
     a:link,
     a:visited,
     a:hover,
     a:active {
-        color: #000 !important;
-        -webkit-text-fill-color: #000 !important;
+        color: #000;
+        -webkit-text-fill-color: #000;
     }
 
-    /* スマホでタップしたときの青い表示を抑える */
-    a {
-        -webkit-tap-highlight-color: transparent;
+}
+@media screen and (max-width: 768px) {
+
+    a.purple-text {
+        color: purple !important;
+        -webkit-text-fill-color: purple !important;
+    }
+
+    a.white-text {
+        color: white !important;
+        -webkit-text-fill-color: white !important;
     }
 
 }

@@ -2591,3 +2591,25 @@ body.swal2-shown{
 .home-page .menu button {
     -webkit-tap-highlight-color: transparent;
 }
+
+/* ===================================
+   スマホ：全ページのリンク文字を黒にする
+=================================== */
+
+@media screen and (max-width: 768px) {
+
+    a,
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        color: #000 !important;
+        -webkit-text-fill-color: #000 !important;
+    }
+
+    /* スマホでタップしたときの青い表示を抑える */
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+}

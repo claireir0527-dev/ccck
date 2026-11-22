@@ -367,21 +367,19 @@ console.log("作成された帯:", personalEventBands);
             hasNotice
         ) {
 
-            mark = "📌";
-
+           mark = '<img src="images/pinn.png" class="calendar-notice-icon calendar-notice-small" alt="">';
         }
 
         else if (hasSubmit) {
-
-            mark = "📝";
-
+mark = '<img src="images/tei.png" class="calendar-notice-icon calendar-notice-small" alt="">';
+    
         }
 
-        else if (hasNotice) {
+       else if (hasNotice) {
+mark = '<img src="images/tuu.png" class="calendar-notice-icon calendar-notice-small" alt="">';
+    
 
-            mark = "🔔";
-
-        }
+}
 
 
 html += `
@@ -579,25 +577,29 @@ function selectDay(day) {
                 </div>
 
                 <div class="task-date">
-                    📅 ${escapeHtml(normalizeDate(item.date))}
+                    <img src="images/karennda.png" class="calendar-date-icon" alt="">
+${escapeHtml(normalizeDate(item.date))}
                 </div>
-
-                <div class="task-date">
-                    ⏰ ${item.time ? escapeHtml(item.time) : "時間未設定"}
-                </div>
+<div class="task-date">
+    <img src="images/tokei.png" class="calendar-date-icon" alt="">
+    ${item.time ? escapeHtml(item.time) : "時間未設定"}
+</div>
 
                 <div class="task-buttons calendar-buttons">
 
                     <button
                         class="edit-btn"
                         onclick="editSubmit('${item.id}')"
-                    >✏️</button>
+                    >
+                        <img src="images/hennsyuu.png" alt="編集">
+                    </button>
 
                     <button
                         class="done-btn"
                         onclick="calendarDeleteSubmit('${item.id}')"
-                    >🗑️</button>
-
+                    >
+    <img src="images/gomibako.png" alt="削除">
+</button>
                 </div>
 
             </div>
@@ -627,11 +629,13 @@ personalEvents.forEach(item => {
                 </div>
 
                 <div class="task-date">
-                    📅 ${escapeHtml(normalizeDate(item.date))}
+                     <img src="images/karennda.png" class="calendar-date-icon" alt="">
+${escapeHtml(normalizeDate(item.date))}
                 </div>
 
                 <div class="task-date">
-                    ⏰ ${item.time ? escapeHtml(item.time) : "時間未設定"}
+                    <img src="images/tokei.png" class="calendar-date-icon" alt="">
+                    ${item.time ? escapeHtml(item.time) : "時間未設定"}
                 </div>
 
                 ${item.memo
@@ -644,13 +648,14 @@ personalEvents.forEach(item => {
                     <button
                         class="edit-btn"
                         onclick="calendarEditEvent('${item.id}')"
-                    >✏️</button>
+                    > <img src="images/hennsyuu.png" alt="編集"></button>
 
                     <button
                         class="done-btn"
                         onclick="calendarDeleteEvent('${item.id}')"
-                    >🗑️</button>
-
+                    >
+    <img src="images/gomibako.png" alt="削除">
+</button>
                 </div>
 
             </div>
@@ -675,11 +680,13 @@ notices.forEach(item => {
                 </div>
 
                 <div class="task-date">
-                    📅 ${escapeHtml(normalizeDate(item.date))}
+                     <img src="images/karennda.png" class="calendar-date-icon" alt="">
+${escapeHtml(normalizeDate(item.date))}
                 </div>
 
                 <div class="task-date">
-                    ⏰ ${item.time
+                    <img src="images/tokei.png" class="calendar-date-icon" alt="">
+                    ${item.time
                         ? escapeHtml(item.time)
                         : "時間未設定"}
                 </div>
@@ -690,15 +697,15 @@ notices.forEach(item => {
                         class="edit-btn"
                         onclick="editNotice('${item.id}')"
                     >
-                        ✏️
+                         <img src="images/hennsyuu.png" alt="編集">
                     </button>
 
                     <button
                         class="done-btn"
                         onclick="calendarDeleteNotice('${item.id}')"
                     >
-                        🗑️
-                    </button>
+    <img src="images/gomibako.png" alt="削除">
+</button>
 
                 </div>
 
@@ -724,25 +731,29 @@ notices.forEach(item => {
 
     if (submitText !== "") {
 
-        html += `
-            📝 提出物
-            <br>
+    html += `
+        <div class="calendar-notice-heading">
+            <img src="images/tei.png" class="calendar-notice-icon calendar-notice-large" alt="">
+            <span>提出物</span>
+        </div>
             ${submitText}
         `;
 
     }
 
 
-    if (noticeText !== "") {
 
-        html += `
-            🔔 通知
-            <br>
-            ${noticeText}
-        `;
+if (noticeText !== "") {
 
-    }
+    html += `
+        <div class="calendar-notice-heading">
+            <img src="images/tuu.png" class="calendar-notice-icon calendar-notice-large" alt="">
+            <span>通知</span>
+        </div>
+        ${noticeText}
+    `;
 
+}
 
     if (eventText !== "") {
         html += `⭐ 自分の予定<br>${eventText}`;
@@ -753,10 +764,11 @@ notices.forEach(item => {
     }
 
     html += `
-        <button type="button" class="add-calendar-event-btn" onclick="openEventAddPage('${date}')" style="display:block;width:220px;max-width:100%;min-height:48px;box-sizing:border-box;margin:18px auto 0;padding:0 24px;border:0;border-radius:9999px;background:#6b3df5;color:#fff;font-size:16px;font-weight:700;line-height:1.2;text-align:center;cursor:pointer;appearance:none;-webkit-appearance:none;">
-            ＋ 予定を追加する
-        </button>
-    `;
+    <button type="button" class="add-calendar-event-btn" onclick="openEventAddPage('${date}')" style="display:flex;align-items:center;justify-content:center;gap:6px;width:220px;max-width:100%;min-height:48px;box-sizing:border-box;margin:18px auto 0;padding:0 24px;border:0;border-radius:9999px;background:#6b3df5;color:#fff;font-size:16px;font-weight:700;line-height:1.2;text-align:center;cursor:pointer;appearance:none;-webkit-appearance:none;">
+        <img src="images/purasu.png" class="menu-plus-icon" alt="">
+        予定を追加する
+    </button>
+`;
 
 
     const plan =

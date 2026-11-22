@@ -2346,3 +2346,228 @@ body.swal2-shown{
 .event-back.back:hover {
     background: #f5f3ff;
 }
+/* ホームアイコン画像 */
+
+/* ホーム画面のメニューアイコン */
+
+.menu-icon {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+/* カレンダー内の通知画像 共通 */
+.calendar-notice-icon {
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+/* 日付マスの中 */
+.calendar-notice-small {
+    width: 20px;
+    height: 20px;
+}
+
+/* マスの外 */
+.calendar-notice-large {
+    width: 30px;
+    height: 30px;
+
+}/* マス外の通知画像と文字を横並び */
+.calendar-notice-heading {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 日付アイコンと日付を横一列にする */
+.calendar-date-icon {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    vertical-align: middle;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.task-date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
+}
+
+
+/* ===================================
+   提出物リストを通知リストと統一
+=================================== */
+
+#submitList .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    background: #fff;
+    padding: 18px;
+    padding-right: 105px;
+    margin-bottom: 15px;
+
+    border-radius: 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+/* 内容部分 */
+#submitList .notice-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* 提出物名 */
+#submitList .notice-text {
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+    overflow-wrap: anywhere;
+}
+
+/* 日付・時刻 */
+#submitList .notice-datetime {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* 残り日数 */
+#submitList .notice-remain {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6b3df5;
+}
+
+#submitList .notice-remain .expired {
+    color: #999;
+}
+
+#submitList .notice-remain .today {
+    color: red;
+}
+
+#submitList .notice-remain .tomorrow {
+    color: orange;
+}
+
+/* 編集・提出済みボタン */
+#submitList .task-buttons {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 0;
+}
+
+#submitList .task-buttons button {
+    position: static !important;
+    transform: none !important;
+
+    width: 75px;
+    height: 35px;
+
+    border: 2px solid #ddd;
+    border-radius: 20px;
+
+    background: white !important;
+    color: #000 !important;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* スマホ表示 */
+@media screen and (max-width: 600px) {
+    #submitList .card {
+        padding: 16px;
+        padding-right: 100px;
+    }
+}
+.qualification-button {
+    white-space: nowrap !important;
+}
+
+.qualification-inner {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center;
+    white-space: nowrap !important;
+    gap: 0 !important;
+}
+
+.qualification-inner img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-right: -10px !important;
+}
+
+/* カレンダーの削除ボタン画像 */
+.calendar-buttons .done-btn img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.menu-plus-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 5px;
+}.menu-plus-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+
+
+.add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.add-btn .menu-plus-icon {
+    position: static !important;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.setting-btn img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+}

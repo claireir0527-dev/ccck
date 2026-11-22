@@ -82,47 +82,55 @@ async function loadTodayTasks() {
 
 
         // 表示
-        submits.forEach(item => {
+     
+// 表示
+submits.forEach(item => {
 
-            list.innerHTML += `
+    list.innerHTML += `
 
-                <div class="task-card">
-                  
-                 <div class="task-title">
+        <div class="card">
 
-                        ${escapeHtml(item.title)}
-                    </div>
+            <div>
 
+                ${escapeHtml(item.title)}
+                 <div style="
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    font-weight: normal;
+">
 
-                    <div class="task-date">
+    <span>
+        <img src="images/karennda.png" class="calendar-date-icon" alt="">
+        ${escapeHtml(normalizeDate(item.date))}
+    </span>
 
-                        📅 ${escapeHtml(
-                            normalizeDate(item.date)
-                        )}
+    ${
+        item.time
+        ? `<span style="font-weight: normal;">
+            <img src="images/tokei.png" class="calendar-date-icon" alt="">
+            ${escapeHtml(item.time)}
+          </span>`
+        : ""
+    }
 
-                        ${
-                            item.time
-                            ? `　⏰ ${escapeHtml(item.time)}`
-                            : ""
-                        }
+</div>
 
-                    </div>
+            </div>
 
+            <button
+                class="done-btn"
+                onclick="submitTodayTask('${item.id}')"
+            >
+                提出済み
+            </button>
 
-                    <button
-                        class="done-btn"
-                        onclick="submitTodayTask('${item.id}')"
-                    >
-                        提出済み
-                    </button>
+        </div>
 
-                </div>
+    `;
 
-            `;
-
-        });
-
-
+});
     } catch (error) {
 
         console.error(

@@ -65,6 +65,9 @@ function showSubmits() {
     list.innerHTML = "";
 
     submits.forEach((item) => {
+        const div = document.createElement("div");
+        div.className = "card";
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
@@ -85,37 +88,51 @@ function showSubmits() {
             remainText = "⚠️ 今日提出！";
             remainClass = "today";
         } else if (diff === 1) {
-            remainText = "⏰ 明日提出";
-            remainClass = "tomorrow";
+         remainText = '<img src="images/kezikann.png" class="calendar-date-icon" alt=""> 明日!';
+remainClass = "tomorrow";
         } else {
             remainText = "あと" + diff + "日";
             remainClass = "";
         }
 
-        const div = document.createElement("div");
-        div.className = "task-card";
-
         div.innerHTML = `
-            <div class="task-title">
-                ${escapeHtml(item.title)}
-            </div>
+            <div class="notice-content">
+                <div class="notice-text">
+                    ${escapeHtml(item.title)}
+                </div>
 
-            <div class="task-date">
-                📅 ${escapeHtml(item.date)}
-                ${item.time ? `　⏰ ${escapeHtml(item.time)}` : ""}
-            </div>
+                <div class="notice-datetime">
+                    <span>
+                        <img src="images/karennda.png"
+                             class="calendar-date-icon"
+                             alt="">
+                        ${escapeHtml(item.date)}
+                    </span>
 
-            <div class="task-remain ${remainClass}">
-                ${remainText}
+                    ${item.time ? `
+                        <span>
+                            <img src="images/tokei.png" class="calendar-date-icon" alt="">
+                            ${escapeHtml(item.time)}
+                        </span>
+                    ` : ""}
+                </div>
+
+                <div class="notice-remain">
+                    <span class="${remainClass}">
+                        ${remainText}
+                    </span>
+                </div>
             </div>
 
             <div class="task-buttons">
-                <button class="edit-btn"
+                <button
+                    class="edit-btn"
                     onclick="editSubmit('${item.id}')">
                     編集
                 </button>
 
-                <button class="done-btn"
+                <button
+                    class="done-btn"
                     onclick="deleteSubmit('${item.id}')">
                     提出済み
                 </button>
@@ -125,6 +142,7 @@ function showSubmits() {
         list.appendChild(div);
     });
 }
+
 
 function escapeHtml(value) {
     return String(value ?? "")
@@ -338,7 +356,7 @@ async function setupEditPage() {
             document.querySelector(".save");
 
         if (save) {
-            save.textContent = "💾 更新";
+            save.textContent = "更新";
         }
 
         const home =
@@ -346,7 +364,7 @@ async function setupEditPage() {
 
         if (home) {
 
-            home.textContent = "🔙 一覧に戻る";
+            home.textContent = "一覧に戻る";
 
             home.onclick = function () {
                 location.href = "tasks.html";

@@ -63,10 +63,10 @@ function updateDateLabel() {
     const [ey, em, ed] = end.split("-").map(Number);
 
     if (start === end) {
-        dateLabel.textContent = `📅 ${sy}年${sm}月${sd}日の予定`;
+        dateLabel.textContent = ` ${sy}年${sm}月${sd}日の予定`;
     } else {
         dateLabel.textContent =
-            `📅 ${sy}年${sm}月${sd}日 ～ ${ey}年${em}月${ed}日`;
+            ` ${sy}年${sm}月${sd}日 ～ ${ey}年${em}月${ed}日`;
     }
 }
 // ===================================

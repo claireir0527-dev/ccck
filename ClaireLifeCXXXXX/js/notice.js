@@ -41,11 +41,11 @@ function showNotice() {
             remainText = "❌ 期限切れ";
             remainClass = "expired";
         } else if (diff === 0) {
-            remainText = "⚠️ 今日";
+            remainText = "⚠️ 今日!";
             remainClass = "today";
         } else if (diff === 1) {
-            remainText = "⏰ 明日";
-            remainClass = "tomorrow";
+           remainText = '<img src="images/kezikann.png" class="calendar-date-icon" alt=""> 明日!';
+remainClass = "tomorrow";
         } else {
             remainText = "あと" + diff + "日";
             remainClass = "";
@@ -54,13 +54,21 @@ function showNotice() {
         div.innerHTML = `
             <div class="notice-content">
                 <div class="notice-text">
-                    🔔 ${escapeHtml(notice.text)}
+                    ${escapeHtml(notice.text)}
                 </div>
 
                 <div class="notice-datetime">
-                    <span>📅 ${notice.date}</span>
-                    ${notice.time ? `<span>⏰ ${notice.time}</span>` : ""}
-                </div>
+    <span>
+        <img src="images/karennda.png" class="calendar-date-icon" alt="">
+        ${notice.date}
+    </span>
+    ${notice.time ? `
+        <span>
+            <img src="images/tokei.png" class="calendar-date-icon" alt="">
+            ${notice.time}
+        </span>
+    ` : ""}
+</div>
 
                 <div class="notice-remain">
                     <span class="${remainClass}">
@@ -340,14 +348,14 @@ async function setupNoticeAddPage() {
                 document.querySelector(".save");
 
             if (saveButton) {
-                saveButton.textContent = "💾 更新";
+                saveButton.textContent = "更新";
             }
 
             const home =
                 document.getElementById("homeNoticeBtn");
 
             if (home) {
-                home.textContent = "🔙 一覧に戻る";
+                home.textContent = "一覧に戻る";
 
                 home.onclick = function () {
                     location.href = "notice.html";

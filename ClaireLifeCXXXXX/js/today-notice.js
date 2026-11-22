@@ -93,19 +93,29 @@ async function loadTodayNotices() {
                         
                         ${escapeHtml(notice.text)}
 
-                        <br>
+  <div style="
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    font-weight: normal;
+">
 
-                        📅
-                        ${escapeHtml(
-                            normalizeDate(notice.date)
-                        )}
+    <span>
+        <img src="images/karennda.png" class="calendar-date-icon" alt="">
+        ${escapeHtml(normalizeDate(notice.date))}
+    </span>
 
-                        ${
-                            notice.time
-                            ? `<br>⏰ ${escapeHtml(notice.time)}`
-                            : ""
-                        }
+    ${
+        notice.time
+        ? `<span style="font-weight: normal;">
+            <img src="images/tokei.png" class="calendar-date-icon" alt="">
+            ${escapeHtml(notice.time)}
+          </span>`
+        : ""
+    }
 
+</div>
                     </div>
 
 

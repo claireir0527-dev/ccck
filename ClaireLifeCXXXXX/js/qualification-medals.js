@@ -164,9 +164,15 @@ accountingExams.forEach(exam => {
             const item = document.createElement("div");
             item.className = "medal-item";
 
-            const medal = document.createElement("div");
-            medal.className = "medal-circle";
-            medal.textContent = "★";
+           const medal = document.createElement("div");
+medal.className = "medal-circle";
+
+const medalImage = document.createElement("img");
+medalImage.src = "images/medaruu.png";
+medalImage.alt = "一級メダル";
+
+medal.appendChild(medalImage);
+
 
             const name = document.createElement("div");
             name.className = "medal-name";

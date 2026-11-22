@@ -247,16 +247,27 @@ function changeIcon(input) {
 
     if (!icon) return;
 
-    // 空欄なら絵文字
-    if (subject === "") {
+ // 空欄でも画像を表示
+// 空欄でも薄い画像を表示
+if (subject === "") {
 
-        if (icon.tagName !== "SPAN") {
-            icon.outerHTML = '<span class="icon">📖</span>';
-        }
+    if (icon.tagName !== "IMG") {
 
-        return;
+        icon.outerHTML =
+            '<img class="icon" alt="教科アイコン">';
+
+        icon =
+            input.parentElement.querySelector(".icon");
     }
 
+    icon.src = "images/kyouka.jpg";
+
+    icon.alt = "教科アイコン";
+
+    icon.style.opacity = "0.5";
+
+    return;
+}
     // 教科が入力されたら画像にする
 let image = null;
 
@@ -278,14 +289,20 @@ let image = null;
     else if (subject.includes("公共")) {
         image = "kouminn.jpg";
     }
-    else if (subject.includes("情報") || subject.includes("ソフトウェア活用") || subject.includes("プログラミング") || subject.includes("マルチメディア") || subject.includes("情報セキュリティ基礎") || subject.includes("開発") || subject.includes("生活")) {
-        image = "?.png";
+
+    
+    else if (subject.includes("ビジネス法規")||subject.includes("情報セキュリティ基礎")||subject.includes("セキュリティー")) {
+        image = "sekyurityi-.jpg";
+    }
+
+    else if (subject.includes("情報") || subject.includes("ソフトウェア活用")  ||  subject.includes("開発") || subject.includes("生活")) {
+        image = "zyouhou.jpg";
     }
     else if (subject.includes("地理")) {
-        image = "?.png";
+        image = "tiri.jpg";
     }
     else if (subject.includes("史")) {
-        image = "?.png";
+        image = "tiri.jpg";
     }
     else if (subject.includes("政治経済")) {
         image = "kouminn.jpg";
@@ -302,9 +319,7 @@ let image = null;
     else if (subject.includes("家庭") || subject.includes("生活文化")) {
         image = "kateika.jpg";
     }
-    else if (subject.includes("課題研究") ) {
-        image = "?.png";
-    }
+    
     else if (subject.includes("ビジネス")) {
         image = "bizinesu.jpg";
     }
@@ -317,24 +332,21 @@ let image = null;
     else if (subject.includes("観光とマーケティング")) {
         image = "ma-ke.jpg";
     }
-    else if (subject.includes("オフィススキル")) {
-        image = "?.png";
+    else if (subject.includes("オフィススキル")||subject.includes("マルチメディア実習")||subject.includes("課題研究")||subject.includes("オフィススキル")) {
+        image = "puroguraminngu.jpg";
     }
     else if (subject.includes("ホームルーム")) {
-        image = "?.png";
+        image = "ho-mu.jpg";
     }
     else if (subject.includes("総合探究")　|| subject.includes("総合的な探究の時間")) {
         image = "sougoutannkyuu.jpg";
     }
 
-// 該当する教科がない場合は本の絵文字
+// 該当する教科がない場合は本の画像
 if (image === null) {
 
-    if (icon.tagName !== "SPAN") {
-        icon.outerHTML = '<span class="icon">📖</span>';
-    }
+    image = "kyouka.jpg";
 
-    return;
 }
     // 画像に切り替え
     if (icon.tagName !== "IMG") {
@@ -343,6 +355,7 @@ if (image === null) {
     }
     icon.src = "images/" + image;
     icon.alt = subject + "のアイコン";
+    icon.style.opacity = "1";
 }
 
 // ===================================

@@ -2364,8 +2364,8 @@ body.swal2-shown{
 
 /* 日付マスの中 */
 .calendar-notice-small {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 /* マスの外 */
@@ -2570,4 +2570,24 @@ body.swal2-shown{
     height: 28px;
     object-fit: contain;
     display: block;
+}
+/* ホーム画面のメニュー文字を黒にする */
+.home-page .menu a,
+.home-page .menu a:link,
+.home-page .menu a:visited,
+.home-page .menu a:hover,
+.home-page .menu a:active {
+    color: #000 !important;
+    text-decoration: none;
+}
+
+/* メニュー内のボタン文字も黒にする */
+.home-page .menu button {
+    color: #000 !important;
+}
+
+/* スマホでタップしたときも青くしない */
+.home-page .menu a,
+.home-page .menu button {
+    -webkit-tap-highlight-color: transparent;
 }

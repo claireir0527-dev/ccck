@@ -82,13 +82,13 @@ function showSubmits() {
         let remainClass;
 
         if (diff < 0) {
-            remainText =  '<img src="images/kezikann.png" class="calendar-date-icon" alt="">期限切れ';
+            remainText =  '<img src="images/sugiteru.png" class="calendar-date-icon" alt="">期限切れ';
             remainClass = "expired";
         } else if (diff === 0) {
             remainText = '<img src="images/kezikann.png" class="calendar-date-icon" alt="">今日提出！';
             remainClass = "today";
         } else if (diff === 1) {
-         remainText = '<img src="images/kezikann.png" class="calendar-date-icon" alt=""> 明日提出！';
+         remainText = '<img src="images/asita.png" class="calendar-date-icon" alt=""> 明日提出！';
 remainClass = "tomorrow";
         } else {
             remainText = "あと" + diff + "日";

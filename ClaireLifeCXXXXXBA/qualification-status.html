@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>資格取得状況 | ClaireLife</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+    <div class="phone short-page">
+
+        <div class="content">
+
+            <header style="
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+">
+
+    <h2>資格取得状況</h2>
+
+    <a href="qualification.html">
+    <a href="qualification.html" class="qualification-back">
+    ←
+</a>
+       
+    </a>
+
+</header>
+
+            <h3>検定別取得状況</h3>
+
+            <div id="qualificationStatus">
+                読み込み中...
+            </div>
+            <button
+                class="back mobile-black"
+                onclick="location.href='index.html'">
+                ホームに戻る
+            </button>
+            
+
+        </div>
+
+    </div>
+</div>
+
+<script type="module" src="js/qualification-status.js"></script>
+<script type="module" src="js/auth-guard.js"></script>
+
+</body>
+</html>

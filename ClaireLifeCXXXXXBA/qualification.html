@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>資格 | ClaireLife</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="phone short-page">
+
+        <div class="content">
+　<header style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+<a href="index.html">←</a>
+<h2 style="
+    margin: 0;
+    position: relative;
+    left: -70px;
+">資格</h2>
+   
+    <div style="
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    ">
+
+        <a href="qualification-status.html"
+           style="
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               text-decoration: none;
+           ">
+           <button class="setting-btn">
+    <img src="images/hyou.png" alt="">
+</button>
+            <span style="font-size: 11px; color: #555;">資格状況</span>
+        </a>
+
+       <a href="qualification-medals.html"
+   style="
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       text-decoration: none;
+   ">
+   <button class="setting-btn">
+    <img src="images/medaru.png" alt="">
+</button>
+    <span style="font-size: 11px; color: #555;">メダル</span>
+</a>
+    </div>
+
+<style>
+.fixed-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.fixed-buttons button {
+    width: 100%;
+    margin: 0;
+    padding: 12px 5px;
+}
+/* ボタンと資格一覧が重ならないようにする */
+.content {
+    padding-bottom: 150px;
+}
+</style>
+
+</header>
+            <h3>取得した資格</h3>
+
+            <div id="qualificationList">
+                読み込み中...
+            </div>
+
+            <div class="fixed-buttons">
+<button
+    class="add-btn"
+    onclick="location.href='qualification-add.html'">
+    <img src="images/purasu.png" class="menu-plus-icon" alt="">
+    資格追加
+</button>
+       
+
+    <button
+        class="back mobile-black"
+        onclick="location.href='index.html'">
+        ホームに戻る
+    </button>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module" src="js/qualification.js"></script>
+<script type="module" src="js/auth-guard.js"></script>
+
+</body>
+</html>

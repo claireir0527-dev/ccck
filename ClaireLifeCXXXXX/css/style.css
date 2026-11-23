@@ -2351,8 +2351,8 @@ body.swal2-shown{
 /* ホーム画面のメニューアイコン */
 
 .menu-icon {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
 }
@@ -2570,4 +2570,13 @@ body.swal2-shown{
     height: 28px;
     object-fit: contain;
     display: block;
-｝
+}
+
+
+.setting-icon {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain;
+    display: block;
+}
+

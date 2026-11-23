@@ -755,9 +755,14 @@ if (noticeText !== "") {
 
 }
 
-    if (eventText !== "") {
-        html += `⭐ 自分の予定<br>${eventText}`;
-    }
+   if (eventText !== "") {
+    html += `
+        <div class="calendar-notice-heading">
+            <img src="images/suta.png" class="calendar-notice-icon calendar-notice-large" alt="">
+            <span>自分の予定</span>
+        </div>
+        ${eventText}`;
+} 
 
     if (submitText === "" && noticeText === "" && eventText === "") {
         html += "予定はありません";

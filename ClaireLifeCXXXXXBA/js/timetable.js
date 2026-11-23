@@ -335,7 +335,7 @@ let image = null;
     else if (subject.includes("オフィススキル")||subject.includes("マルチメディア実習")||subject.includes("課題研究")||subject.includes("オフィススキル")) {
         image = "puroguraminngu.jpg";
     }
-    else if (subject.includes("ホームルーム")) {
+    else if (subject.includes("ホームルーム")||subject.includes ("ＨＲ")||subject.includes("ＬＨＲ")||subject.includes("HR")||subject.includes("LHR")) {
         image = "ho-mu.jpg";
     }
     else if (subject.includes("総合探究")　|| subject.includes("総合的な探究の時間")) {

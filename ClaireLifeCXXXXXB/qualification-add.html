@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>資格の登録 | ClaireLife</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body>
+
+<div class="app">
+    <div class="phone short-page">
+        <div class="content">
+
+            <header>
+                <h2 id="pageTitle">資格の追加</h2>
+            </header>
+
+            <label>資格の種類</label>
+
+<select id="qualificationType">
+    <option value="">選択してください</option>
+    <option value="商業経済検定試験">商業経済検定試験</option>
+    <option value="簿記実務検定試験">簿記実務検定試験</option>
+    <option value="情報処理検定試験">情報処理検定試験</option>
+    <option value="ビジネス文書実務検定試験">ビジネス文書実務検定試験</option>
+    <option value="会計実務検定試験">会計実務検定試験</option>
+    <option value="英語検定試験">英語検定試験</option>
+    <option value="ビジネス計算実務検定試験">ビジネス計算実務検定試験</option>
+    <option value="ビジネスコミュニケーション検定試験">ビジネスコミュニケーション検定試験</option>
+    <option value="その他">その他</option>
+</select>
+
+
+            <div id="otherNameArea" style="display:none;">
+                <label>資格名</label>
+                <input
+                    type="text"
+                    id="otherName"
+                    placeholder="資格名を入力">
+            </div>
+  <!-- 情報処理検定の科目 -->
+<div id="informationSubjectArea" style="display:none;">
+    <label>科目</label>
+
+    <select id="informationSubject">
+        <option value="">科目を選択してください</option>
+        <option value="プログラミング">プログラミング</option>
+        <option value="ビジネス情報">ビジネス情報</option>
+    </select>
+</div>
+
+
+<!-- 会計の検定試験 -->
+<div id="accountingExamArea" style="display:none;">
+
+    <label>検定試験</label>
+
+    <select id="accountingExam">
+        <option value="">選択してください</option>
+        <option value="財務諸表分析検定試験">財務諸表分析検定試験</option>
+        <option value="財務会計検定試験">財務会計検定試験</option>
+        <option value="管理会計検定試験">管理会計検定試験</option>
+    </select>
+
+</div>
+
+<!-- 級・レベル -->
+ <!-- ビジネス計算の選択 -->
+<div id="businessCalcArea" style="display:none;">
+
+    <label>計算方法</label>
+    <select id="businessCalcMethod">
+        <option value="">選択してください</option>
+        <option value="電卓">電卓</option>
+        <option value="珠算">珠算</option>
+    </select>
+
+    <div id="businessCalcTypeArea" style="display:none;">
+        <label>検定内容</label>
+        <select id="businessCalcType">
+            <option value="">選択してください</option>
+            <option value="普通計算">普通計算</option>
+            <option value="ビジネス計算">ビジネス計算</option>
+            <option value="両方">両方</option>
+        </select>
+    </div>
+
+</div><!-- ビジネス文書実務検定 -->
+<div id="businessDocumentArea" style="display:none;">
+
+    <label>検定内容</label>
+
+    <select id="businessDocumentType">
+        <option value="">選択してください</option>
+        <option value="ビジネス文書">ビジネス文書</option>
+        <option value="速度">速度</option>
+        <option value="両方">両方</option>
+    </select>
+
+</div>
+
+
+<div id="gradeArea">
+    <label id="gradeLabel">級・レベル</label>
+
+    <select id="qualificationGrade">
+        <option value="">選択してください</option>
+    </select>
+</div> 
+
+<!-- 簿記1級の科目 -->
+<div id="accountingSubjectArea" style="display:none;">
+    <label>科目</label>
+<select id="accountingSubject">
+    <option value="">選択してください</option>
+    <option value="会計">会計</option>
+    <option value="原価計算">原価計算</option>
+    <option value="両方">両方</option>
+</select>
+    
+</div>
+
+           <label>取得日</label>
+<input
+    type="text"
+    id="qualificationDate"
+    placeholder="取得日を選択"
+    readonly>
+
+            <button class="add-btn" id="saveQualification">
+                登録する
+            </button>
+
+            <button class="back"
+                onclick="location.href='qualification.html'">
+                キャンセル
+            </button>
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr">
+
+</script><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
+
+<script type="module" src="js/qualification-add.js"></script>
+<script type="module" src="js/auth-guard.js"></script>
+
+</body>
+</html>

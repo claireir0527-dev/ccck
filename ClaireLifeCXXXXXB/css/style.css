@@ -2592,3 +2592,8 @@ body.swal2-shown{
     }
 
 }
+
+.calendar-date-icon {
+    position: relative;
+    top: -2px  ;
+}

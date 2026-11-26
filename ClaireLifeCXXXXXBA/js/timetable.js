@@ -274,7 +274,7 @@ let image = null;
     if (subject.includes("数学") || subject.includes("関数")) {
         image = "suugaku.jpg";
     }
-    else if (subject.includes("国語") || subject.includes("言語") || subject.includes("古典") || subject.includes("表現研究")) {
+    else if (subject.includes("国語") || subject.includes("言語") || subject.includes("古典") || subject.includes("表現探究")) {
         image = "kokugo.jpg";
     }
     else if (subject.includes("英語") || subject.includes("英会話") || subject.includes("論理表現") || subject.includes("コミュニケーション")) {
@@ -295,7 +295,7 @@ let image = null;
         image = "sekyurityi-.jpg";
     }
 
-    else if (subject.includes("情報") || subject.includes("ソフトウェア活用")  ||  subject.includes("開発") || subject.includes("生活")) {
+    else if (subject.includes("情報処理")||subject.includes("情報")||subject.includes("商品開発と流通")||subject.includes("ソフトウェア活用")  ||  subject.includes("開発とテクノロジー") || subject.includes("生活とテクノロジー")) {
         image = "zyouhou.jpg";
     }
     else if (subject.includes("地理")) {
@@ -316,11 +316,11 @@ let image = null;
     else if (subject.includes("書道")) {
         image = "syodou.jpg";
     }
-    else if (subject.includes("家庭") || subject.includes("生活文化")) {
+    else if (subject.includes("家庭") || subject.includes("家庭基礎") || subject.includes("生活文化")) {
         image = "kateika.jpg";
     }
     
-    else if (subject.includes("ビジネス")) {
+    else if (subject.includes("ビジネス")||subject.includes("ビジネスコミュニケーション")) {
         image = "bizinesu.jpg";
     }
     else if (subject.includes("商品開発と流通")) {
@@ -332,7 +332,7 @@ let image = null;
     else if (subject.includes("観光とマーケティング")) {
         image = "ma-ke.jpg";
     }
-    else if (subject.includes("オフィススキル")||subject.includes("マルチメディア実習")||subject.includes("課題研究")||subject.includes("オフィススキル")) {
+    else if (subject.includes("オフィススキル")||subject.includes("プログラミング")||subject.includes("マルチメディア実習")||subject.includes("課題研究")||subject.includes("オフィススキル")) {
         image = "puroguraminngu.jpg";
     }
     else if (subject.includes("ホームルーム")||subject.includes ("ＨＲ")||subject.includes("ＬＨＲ")||subject.includes("HR")||subject.includes("LHR")) {

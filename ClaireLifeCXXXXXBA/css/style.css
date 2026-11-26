@@ -2756,4 +2756,12 @@ body.swal2-shown{
     margin-right: 5px;
 }
 
+.subject-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    vertical-align: middle;
+    flex-shrink: 0;
 
+    opacity: 0.7;
+}

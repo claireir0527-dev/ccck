@@ -23,6 +23,22 @@ const grade = document.getElementById("qualificationGrade");
 const gradeLabel = document.getElementById("gradeLabel");
 const gradeArea = document.getElementById("gradeArea");
 
+const gradeOtherInput = document.createElement("input");
+
+gradeOtherInput.type = "text";
+gradeOtherInput.id = "gradeOtherInput";
+gradeOtherInput.placeholder = "級・レベルを入力";
+
+gradeOtherInput.style.display = "none";
+gradeOtherInput.style.width = "100%";
+gradeOtherInput.style.boxSizing = "border-box";
+gradeOtherInput.style.marginTop = "8px";
+
+gradeArea.appendChild(gradeOtherInput);
+
+
+
+
 const date = document.getElementById("qualificationDate");
 const saveButton = document.getElementById("saveQualification");
 const pageTitle = document.getElementById("pageTitle");
@@ -97,6 +113,7 @@ if (typeof flatpickr !== "undefined") {
 // 級の選択肢を作る
 // ===================================
 
+
 function setGrades(levels, label = "級・レベル") {
 
     gradeLabel.textContent = label;
@@ -108,8 +125,18 @@ function setGrades(levels, label = "級・レベル") {
         grade.add(new Option(level, level));
     });
 
+    // その他を追加
+    if (!levels.includes("その他")) {
+        grade.add(new Option("その他", "その他"));
+    }
+
     gradeArea.style.display = "block";
+
+    // 自由入力欄を隠す
+    gradeOtherInput.style.display = "none";
+    gradeOtherInput.value = "";
 }
+
 
 // ===================================
 // 資格の種類を変更したとき
@@ -142,7 +169,6 @@ type.addEventListener("change", () => {
         "1級",
         "2級",
         "3級",
-        "その他・無"
     ]);
 
     // 商業経済検定
@@ -200,8 +226,21 @@ if (type.value === "ビジネスコミュニケーション検定試験") {
 // 簿記実務検定：1級の科目
 // ===================================
 
+
 grade.addEventListener("change", () => {
 
+    // その他を選んだとき
+    if (grade.value === "その他") {
+
+        gradeOtherInput.style.display = "block";
+
+    } else {
+
+        gradeOtherInput.style.display = "none";
+        gradeOtherInput.value = "";
+    }
+
+    // 簿記実務検定：1級の科目
     if (
         type.value === "簿記実務検定試験" &&
         grade.value === "1級"
@@ -212,6 +251,7 @@ grade.addEventListener("change", () => {
         accountingSubject.value = "";
     }
 });
+
 
 // ===================================
 // 情報処理検定：科目を選んだとき
@@ -390,6 +430,21 @@ async function loadQualification() {
     ) {
         grade.value = data.grade || "";
     }
+// 級・レベルが「その他」の場合
+if (data.gradeIsOther) {
+
+    grade.value = "その他・無";
+
+    gradeOtherInput.value = data.grade || "";
+
+    gradeOtherInput.style.display = "block";
+
+} else {
+
+    gradeOtherInput.style.display = "none";
+
+}
+
 
     // 取得日
     if (datePicker) {
@@ -460,37 +515,47 @@ saveButton.addEventListener("click", async () => {
 
    // 級のチェック（会計以外）
 
-// 級が必要な資格だけチェック
-if (
-    selectedType !== "会計実務検定試験" &&
-    selectedType !== "ビジネスコミュニケーション検定試験" &&
-    !grade.value
-) {
-    await showNotice("級・レベルを選んでね。");
-    return;
-}
-    // 簿記1級の科目チェック
+    // 級・レベルのチェック
     if (
-        selectedType === "簿記実務検定試験" &&
-        grade.value === "1級" &&
-        !accountingSubject.value
+        selectedType !== "その他" &&
+        selectedType !== "会計実務検定試験" &&
+        selectedType !== "ビジネスコミュニケーション検定試験"
     ) {
-        await showNotice("会計か原価計算を選んでね。");
-        return;
+
+        // 級・レベルが未選択の場合
+        if (!grade.value) {
+            await showNotice("級・レベルを選んでね。");
+            return;
+        }
+
+        // 級・レベルで「その他」を選んだ場合
+        if (
+            grade.value === "その他" &&
+            !gradeOtherInput.value.trim()
+        ) {
+            await showNotice("級・レベルを入力してね。");
+            return;
+        }
     }
 
     
+
 
     // 保存データ
     const data = {
 
         name: name,
-
-        grade:
+grade:
     selectedType === "会計実務検定試験" ||
     selectedType === "ビジネスコミュニケーション検定試験"
         ? ""
-        : grade.value.trim(),
+        : grade.value === "その他"
+            ? gradeOtherInput.value.trim()
+            : grade.value,
+
+gradeIsOther:
+    grade.value === "その他",
+        
         subject:
             selectedType === "情報処理検定試験"
                 ? informationSubject.value
